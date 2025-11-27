@@ -64,7 +64,7 @@ public class Game {
         this.time_control = time_control;
         this.initital_fen = initital_fen;
         this.final_fen = final_fen;
-        this.is_bot_game = is_bot_game;
+        this.is_bot_game = false;
         this.botDifficulty = botDifficulty;
         this.whitePlayer = whitePlayer;
         this.blackPlayer = blackPlayer;
@@ -188,5 +188,37 @@ public class Game {
                 ", blackPlayer=" + blackPlayer +
                 ", winner=" + winner +
                 '}';
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public List<CheatingAnalysis> getCheating_game() {
+        return cheating_game;
+    }
+
+    public List<GameState> getGameStates() {
+        return gameStates;
+    }
+
+    public List<GameOpening> getGameOpenings() {
+        return gameOpenings;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void setCheating_game(List<CheatingAnalysis> cheating_game) {
+        this.cheating_game = cheating_game;
+    }
+
+    public void setGameStates(List<GameState> gameStates) {
+        this.gameStates = gameStates;
+    }
+
+    public void setGameOpenings(List<GameOpening> gameOpenings) {
+        this.gameOpenings = gameOpenings;
     }
 }

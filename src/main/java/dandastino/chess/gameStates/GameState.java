@@ -95,4 +95,6 @@ public class GameState {
                 ", analysis_json='" + analysis_json + '\'' +
                 '}';
     }
+
+
 }

@@ -29,9 +29,9 @@ public class UserSetting {
 
     public UserSetting(LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
         this.created_at = created_at;
-        this.notifications_enabled = notifications_enabled;
-        this.show_move_suggestions = show_move_suggestions;
-        this.allow_engine_analysis = allow_engine_analysis;
+        this.notifications_enabled = true;
+        this.show_move_suggestions = true;
+        this.allow_engine_analysis = true;
         this.language = language;
         this.preferred_time_control = preferred_time_control;
         this.theme = theme;
@@ -96,5 +96,13 @@ public class UserSetting {
 
     public void setCreated_at(LocalDateTime created_at) {
         this.created_at = created_at;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

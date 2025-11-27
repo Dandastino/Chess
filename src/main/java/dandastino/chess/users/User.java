@@ -164,4 +164,88 @@ public class User {
                 ", country=" + country +
                 '}';
     }
+
+    public UUID getUser_id() {
+        return user_id;
+    }
+
+    public UserType getType() {
+        return type;
+    }
+
+    public void setType(UserType type) {
+        this.type = type;
+    }
+
+    public List<Friend> getFriend1() {
+        return friend1;
+    }
+
+    public void setFriend1(List<Friend> friend1) {
+        this.friend1 = friend1;
+    }
+
+    public List<Friend> getFriend2() {
+        return friend2;
+    }
+
+    public void setFriend2(List<Friend> friend2) {
+        this.friend2 = friend2;
+    }
+
+    public UserSetting getUserSetting() {
+        return userSetting;
+    }
+
+    public void setUserSetting(UserSetting userSetting) {
+        this.userSetting = userSetting;
+    }
+
+    public List<Game> getWhite() {
+        return white;
+    }
+
+    public void setWhite(List<Game> white) {
+        this.white = white;
+    }
+
+    public List<Game> getBlack() {
+        return black;
+    }
+
+    public void setBlack(List<Game> black) {
+        this.black = black;
+    }
+
+    public List<Game> getWinner() {
+        return winner;
+    }
+
+    public void setWinner(List<Game> winner) {
+        this.winner = winner;
+    }
+
+    public List<CheatingAnalysis> getCheating_user() {
+        return cheating_user;
+    }
+
+    public void setCheating_user(List<CheatingAnalysis> cheating_user) {
+        this.cheating_user = cheating_user;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Move> getUserMove() {
+        return userMove;
+    }
+
+    public void setUserMove(List<Move> userMove) {
+        this.userMove = userMove;
+    }
 }

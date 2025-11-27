@@ -47,8 +47,8 @@ public class Move {
         this.fen_after_move = fen_after_move;
         this.timestamp = timestamp;
         this.time_spent_ms = time_spent_ms;
-        this.is_check = is_check;
-        this.is_checkmate = is_checkmate;
+        this.is_check = false;
+        this.is_checkmate = false;
         this.moveAnalysis = moveAnalysis;
         this.gameAnalysis = gameAnalysis;
         this.userMove = userAnalysis;
@@ -172,5 +172,13 @@ public class Move {
                 ", gameAnalysis=" + gameAnalysis +
                 ", userAnalysis=" + userMove +
                 '}';
+    }
+
+    public User getUserMove() {
+        return userMove;
+    }
+
+    public void setUserMove(User userMove) {
+        this.userMove = userMove;
     }
 }

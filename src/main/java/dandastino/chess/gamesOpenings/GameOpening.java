@@ -21,4 +21,36 @@ public class GameOpening {
     @ManyToOne
     @JoinColumn(name = "opening_id")
     private Opening opening;
+
+    public GameOpening(){}
+
+    public GameOpening(Opening opening, Game game) {
+        this.opening = opening;
+        this.game = game;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public Opening getOpening() {
+        return opening;
+    }
+
+    public void setOpening(Opening opening) {
+        this.opening = opening;
+    }
+
+    @Override
+    public String toString() {
+        return "GameOpening{" +
+                "game_opening_id=" + game_opening_id +
+                ", game=" + game +
+                ", opening=" + opening +
+                '}';
+    }
 }

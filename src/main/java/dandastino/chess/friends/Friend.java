@@ -59,4 +59,13 @@ public class Friend {
     public void setFriend2(User friend2) {
         this.friend2 = friend2;
     }
+
+    @Override
+    public String toString() {
+        return "Friend{" +
+                "friendship_id=" + friendship_id +
+                ", friend1=" + friend1 +
+                ", friend2=" + friend2 +
+                '}';
+    }
 }

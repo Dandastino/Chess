@@ -77,4 +77,12 @@ public class Opening {
                 ", moves='" + moves + '\'' +
                 '}';
     }
+
+    public List<GameOpening> getGamesOpenings() {
+        return gamesOpenings;
+    }
+
+    public void setGamesOpenings(List<GameOpening> gamesOpenings) {
+        this.gamesOpenings = gamesOpenings;
+    }
 }
