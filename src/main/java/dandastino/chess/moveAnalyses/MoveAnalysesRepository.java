@@ -1,4 +1,4 @@
-package dandastino.chess.users;
+package dandastino.chess.moveAnalyses;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, UUID> {
-
+public interface MoveAnalysesRepository extends JpaRepository<MoveAnalysis, UUID> {
 }
