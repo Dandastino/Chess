@@ -1,6 +1,6 @@
 package dandastino.chess.users;
 import dandastino.chess.friends.Friend;
-import dandastino.chess.user_settings.userSetting;
+import dandastino.chess.user_settings.UserSetting;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -35,7 +35,7 @@ public class User {
     private List<Friend> friend2;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private userSetting userSetting;
+    private UserSetting userSetting;
 
     public User() {
 

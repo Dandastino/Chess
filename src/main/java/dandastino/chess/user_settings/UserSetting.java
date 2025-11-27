@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Table(name="user_settings")
 @Entity
-public class userSetting {
+public class UserSetting {
 
     @Id
     @GeneratedValue
@@ -25,9 +25,9 @@ public class userSetting {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public userSetting(){}
+    public UserSetting(){}
 
-    public userSetting(UUID userSetting, LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
+    public UserSetting(UUID userSetting, LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
         this.userSetting = userSetting;
         this.created_at = created_at;
         this.notifications_enabled = notifications_enabled;
