@@ -1,6 +1,7 @@
 package dandastino.chess.games;
 
 import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
+import dandastino.chess.gameStates.GameState;
 import dandastino.chess.messages.Message;
 import dandastino.chess.users.User;
 import jakarta.persistence.*;
@@ -44,9 +45,12 @@ public class Game {
     @OneToMany(mappedBy = "cheating_game")
     private List<CheatingAnalysis> cheating_game;
 
+    @OneToMany(mappedBy = "game")
+    private List<GameState> gameStates;
+
     public Game(){}
 
-    public Game(UUID game_id, Status status, LocalDateTime created_at, LocalDateTime updated_at, Result result, String time_control, String initital_fen, String final_fen, boolean is_bot_game, int botDifficulty, User whitePlayer, User blackPlayer, User winner) {
+    public Game(Status status, LocalDateTime created_at, LocalDateTime updated_at, Result result, String time_control, String initital_fen, String final_fen, boolean is_bot_game, int botDifficulty, User whitePlayer, User blackPlayer, User winner) {
         this.game_id = game_id;
         this.status = status;
         this.created_at = created_at;

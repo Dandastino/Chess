@@ -26,8 +26,7 @@ public class Friend {
 
     public Friend(){}
 
-    public Friend(UUID friendship_id, User friend1, User friend2, LocalDateTime created_at) {
-        this.friendship_id = friendship_id;
+    public Friend(User friend1, User friend2, LocalDateTime created_at) {
         this.friend1 = friend1;
         this.friend2 = friend2;
         this.created_at = created_at;

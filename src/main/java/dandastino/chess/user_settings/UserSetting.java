@@ -27,8 +27,7 @@ public class UserSetting {
 
     public UserSetting(){}
 
-    public UserSetting(UUID userSetting, LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
-        this.userSetting = userSetting;
+    public UserSetting(LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
         this.created_at = created_at;
         this.notifications_enabled = notifications_enabled;
         this.show_move_suggestions = show_move_suggestions;
