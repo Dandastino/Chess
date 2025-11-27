@@ -11,7 +11,7 @@ public class GameState {
 
     @Id
     @GeneratedValue
-    private UUID game_id;
+    private UUID game_state_id;
     private String move_number;
     private String fen;
     private int evaluation_cp;
@@ -33,7 +33,7 @@ public class GameState {
     }
 
     public UUID getGame_id() {
-        return game_id;
+        return game_state_id;
     }
 
     public String getMove_number() {
@@ -87,7 +87,7 @@ public class GameState {
     @Override
     public String toString() {
         return "GameState{" +
-                "game_id=" + game_id +
+                "game_state_id=" + game_state_id +
                 ", move_number='" + move_number + '\'' +
                 ", fen='" + fen + '\'' +
                 ", evaluation_cp=" + evaluation_cp +
