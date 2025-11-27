@@ -26,10 +26,10 @@ public class Game {
     private boolean is_bot_game;
     private int botDifficulty;
     @ManyToOne
-    @JoinColumn(name = "white_id")
+    @JoinColumn(name = "white_id", nullable = false)
     private User whitePlayer;
     @ManyToOne
-    @JoinColumn(name = "black_id")
+    @JoinColumn(name = "black_id", nullable = false)
     private User blackPlayer;
     @ManyToOne
     @JoinColumn(name = "winner_id", nullable = true)

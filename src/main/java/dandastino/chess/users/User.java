@@ -1,5 +1,6 @@
 package dandastino.chess.users;
 import dandastino.chess.friends.Friend;
+import dandastino.chess.games.Game;
 import dandastino.chess.user_settings.UserSetting;
 import jakarta.persistence.*;
 
@@ -27,6 +28,9 @@ public class User {
     private String bio;
     @Enumerated(EnumType.STRING)
     private Country country;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserType type;
 
     @OneToMany(mappedBy = "friend1")
     private List<Friend> friend1;
@@ -36,6 +40,19 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserSetting userSetting;
+
+    @OneToMany(mappedBy = "whitePlayer")
+    private List<Game> white;
+
+    @OneToMany(mappedBy = "blackPlayer")
+    private List<Game> black;
+
+    @OneToMany(mappedBy = "winner")
+    private List<Game> winner;
+
+
+
+
 
     public User() {
 
