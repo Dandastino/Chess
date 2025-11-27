@@ -1,7 +1,9 @@
 package dandastino.chess.games;
 
 import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
+import dandastino.chess.friends.Friend;
 import dandastino.chess.gameStates.GameState;
+import dandastino.chess.gamesOpenings.GameOpening;
 import dandastino.chess.messages.Message;
 import dandastino.chess.users.User;
 import jakarta.persistence.*;
@@ -47,6 +49,9 @@ public class Game {
 
     @OneToMany(mappedBy = "game")
     private List<GameState> gameStates;
+
+    @OneToMany(mappedBy = "game")
+    private List<GameOpening> gameOpenings;
 
     public Game(){}
 
