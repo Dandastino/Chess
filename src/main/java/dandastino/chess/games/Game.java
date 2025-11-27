@@ -1,10 +1,12 @@
 package dandastino.chess.games;
 
+import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
 import dandastino.chess.users.User;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,6 +36,9 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "winner_id", nullable = true)
     private User winner;
+
+    @OneToMany(mappedBy = "cheating_game")
+    private List<CheatingAnalysis> cheating_game;
 
     public Game(){}
 

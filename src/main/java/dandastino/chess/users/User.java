@@ -1,4 +1,5 @@
 package dandastino.chess.users;
+import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
 import dandastino.chess.friends.Friend;
 import dandastino.chess.games.Game;
 import dandastino.chess.user_settings.UserSetting;
@@ -50,7 +51,8 @@ public class User {
     @OneToMany(mappedBy = "winner")
     private List<Game> winner;
 
-
+    @OneToMany(mappedBy = "cheating_user")
+    private List<CheatingAnalysis> cheating_user;
 
 
 
