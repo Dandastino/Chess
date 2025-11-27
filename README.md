@@ -49,23 +49,23 @@ No need for Python unless you want more complex ML. This project integrates AI d
 ## 📌 Feature Checklist per Phase
 
 ### Phase 1 — Backend Core (Medium Version)
-- [x] User Registration & Login
-- [x] Player profile & settings support
-- [x] Elo Rating system (default 1200)
-- [x] Create/Join chess games
-- [x] Time controls (bullet, blitz, classical)
-- [x] Move validation engine (pure Java)
-- [x] Board state update (FEN storage)
-- [x] Detect: Check, Mate, Stalemate, Repetition draws, Insufficient material
-- [x] Store move history & PGN export
-- [x] Real-time updates using Spring WebSockets
+- [ ] User Registration & Login
+- [ ] Player profile & settings support
+- [ ] Elo Rating system (default 1200)
+- [ ] Create/Join chess games
+- [ ] Time controls (bullet, blitz, classical)
+- [ ] Move validation engine (pure Java)
+- [ ] Board state update (FEN storage)
+- [ ] Detect: Check, Mate, Stalemate, Repetition draws, Insufficient material
+- [ ] Store move history & PGN export
+- [ ] Real-time updates using Spring WebSockets
 
 ### Phase 2 — AI Chess Analysis (Advanced Version)
-- [x] Stockfish engine integration (UCI)
-- [x] FEN → evaluation score per move
-- [x] Best move suggestions
-- [x] Blunder/Mistake/Inaccuracy detection
-- [x] Opening classification with ECO codes
+- [ ] Stockfish engine integration (UCI)
+- [ ] FEN → evaluation score per move
+- [ ] Best move suggestions
+- [ ] Blunder/Mistake/Inaccuracy detection
+- [ ] Opening classification with ECO codes
 - [ ] Anti-cheating suspicion score
 - [ ] Insights like:
     - *"You blunder knights early"*
