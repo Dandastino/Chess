@@ -3,6 +3,8 @@ import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
 import dandastino.chess.friends.Friend;
 import dandastino.chess.games.Game;
 import dandastino.chess.messages.Message;
+import dandastino.chess.moveAnalyses.MoveAnalysis;
+import dandastino.chess.moves.Move;
 import dandastino.chess.user_settings.UserSetting;
 import jakarta.persistence.*;
 
@@ -57,6 +59,9 @@ public class User {
 
     @OneToMany(mappedBy = "sender")
     private List<Message> messages;
+
+    @OneToMany(mappedBy = "userMove")
+    private List<Move> userMove;
 
 
     public User() {
