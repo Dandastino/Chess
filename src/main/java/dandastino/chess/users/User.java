@@ -2,6 +2,7 @@ package dandastino.chess.users;
 import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
 import dandastino.chess.friends.Friend;
 import dandastino.chess.games.Game;
+import dandastino.chess.messages.Message;
 import dandastino.chess.user_settings.UserSetting;
 import jakarta.persistence.*;
 
@@ -54,6 +55,8 @@ public class User {
     @OneToMany(mappedBy = "cheating_user")
     private List<CheatingAnalysis> cheating_user;
 
+    @OneToMany(mappedBy = "sender")
+    private List<Message> messages;
 
 
     public User() {

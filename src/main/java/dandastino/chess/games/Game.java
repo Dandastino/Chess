@@ -1,6 +1,7 @@
 package dandastino.chess.games;
 
 import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
+import dandastino.chess.messages.Message;
 import dandastino.chess.users.User;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class Game {
     @ManyToOne
     @JoinColumn(name = "winner_id", nullable = true)
     private User winner;
+
+    @OneToMany(mappedBy = "game")
+    private List<Message> messages;
 
     @OneToMany(mappedBy = "cheating_game")
     private List<CheatingAnalysis> cheating_game;
