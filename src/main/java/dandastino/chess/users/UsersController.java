@@ -1,6 +1,9 @@
 package dandastino.chess.users;
 
+import dandastino.chess.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +26,10 @@ public class UsersController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public NewUsersRespDTO createUser(@RequestBody NewUsersDTO body) {
+    public NewUsersRespDTO createUser(@RequestBody @Validated NewUsersDTO body, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            throw new ValidationException(bindingResult.getAllErrors().stream().map(fielError -> fielError.getDefaultMessage()).toList());
+        }
         return this.usersService.createUser(body);
     }
 
