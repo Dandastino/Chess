@@ -1,10 +1,12 @@
 package dandastino.chess.users;
 
 import dandastino.chess.exceptions.ValidationException;
+import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -47,5 +49,10 @@ public class UsersController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("user_id") UUID userId){
         this.usersService.deleteUser(userId);
+    }
+
+    @PatchMapping("/{user_id}/avatar")
+    public void updateAvatar(@RequestParam("avatar") MultipartFile file){
+        System.out.println(file.getOriginalFilename());
     }
 }

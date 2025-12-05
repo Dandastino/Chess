@@ -1,11 +1,16 @@
 package dandastino.chess.users;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import dandastino.chess.exceptions.NotFoundException;
 import dandastino.chess.exceptions.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -13,6 +18,8 @@ public class UsersService {
 
     @Autowired
     private UsersRepository users_repo;
+    @Autowired
+    private Cloudinary imageUploader;
 
     public List<User> getUsers() {
         return this.users_repo.findAll();
@@ -52,5 +59,22 @@ public class UsersService {
     public void deleteUser(UUID userId){
         User found = getUserById(userId);
         this.users_repo.delete(found);
+    }
+
+    public void updateUserUrl(UUID userId, MultipartFile file){
+        User found = getUserById(userId);
+        // Validate the file - format, size, etc.
+
+        Map options = ObjectUtils.asMap("folder", "chess_app/avatars");
+
+        try {
+            Map result = imageUploader.uploader().upload(file.getBytes(), options);
+            String imageUrl = result.get("secure_url").toString();
+            // save the url to the user
+            found.setAvatar_url(imageUrl);
+            this.users_repo.save(found);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
