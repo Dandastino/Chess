@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +18,5 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 
     @Query("SELECT COUNT(f) FROM Friend f WHERE f.friend1.user_id = :userID")
     Long countFriends(UUID userID);
-
 
 }

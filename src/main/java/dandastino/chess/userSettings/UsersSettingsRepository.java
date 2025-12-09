@@ -1,4 +1,4 @@
-package dandastino.chess.user_settings;
+package dandastino.chess.userSettings;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package dandastino.chess.user_settings;
+package dandastino.chess.userSettings;
 
 import dandastino.chess.users.User;
 import jakarta.persistence.*;

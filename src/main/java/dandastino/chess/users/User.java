@@ -4,7 +4,7 @@ import dandastino.chess.friends.Friend;
 import dandastino.chess.games.Game;
 import dandastino.chess.messages.Message;
 import dandastino.chess.moves.Move;
-import dandastino.chess.user_settings.UserSetting;
+import dandastino.chess.userSettings.UserSetting;
 import dandastino.chess.utility.Country;
 import jakarta.persistence.*;
 

@@ -1,4 +1,4 @@
-package dandastino.chess.tools;
+package dandastino.chess.utility;
 
 import com.cloudinary.Cloudinary;
 import org.springframework.beans.factory.annotation.Value;

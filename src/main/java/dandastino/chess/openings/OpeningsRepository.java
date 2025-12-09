@@ -7,4 +7,6 @@ import java.util.UUID;
 
 @Repository
 public interface OpeningsRepository extends JpaRepository<Opening, UUID> {
+
+
 }
