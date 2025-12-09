@@ -6,7 +6,7 @@ import dandastino.chess.piece.Piece;
 public class MoveValidator {
 
     public boolean isMoveLegal(Board board, Move move) {
-        Piece piece = board.getPiece();
+        Piece piece = board.getPiece(move.getStartRow(), move.getStartCol()); // Piece Type and color
 
         if (piece == null) return false;
 
@@ -21,11 +21,13 @@ public class MoveValidator {
         };
     }
 
-    private boolean validatePawnMove(Board board, Move move) { }
-    private boolean validateKnightMove(Board board, Move move) { }
-    private boolean validateBishopMove(Board board, Move move) { }
-    private boolean validateRookMove(Board board, Move move) { }
-    private boolean validateQueenMove(Board board, Move move) { }
-    private boolean validateKingMove(Board board, Move move) { }
+    private boolean validatePawnMove(Board board, Move move) {
+        int startRow = move.get
+    }
+    private boolean validateKnightMove(Board board, Move move) { … }
+    private boolean validateBishopMove(Board board, Move move) { … }
+    private boolean validateRookMove(Board board, Move move) { … }
+    private boolean validateQueenMove(Board board, Move move) { … }
+    private boolean validateKingMove(Board board, Move move) { … }
 }
 
