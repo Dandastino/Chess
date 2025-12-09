@@ -1,4 +1,4 @@
-package dandastino.chess.users;
+package dandastino.chess.utility;
 
 public enum Country {
     Afghanistan, Albania, Algeria, Andorra , Angola, Antigua, Argentina, Armenia, Australia, Austria, Azerbaijan,

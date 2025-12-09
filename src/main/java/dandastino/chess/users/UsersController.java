@@ -1,6 +1,7 @@
 package dandastino.chess.users;
 
 import dandastino.chess.exceptions.ValidationException;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -29,7 +30,7 @@ public class UsersController {
     @ResponseStatus(HttpStatus.CREATED)
     public NewUsersRespDTO createUser(@RequestBody @Validated NewUsersDTO body, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            throw new ValidationException(bindingResult.getAllErrors().stream().map(fielError -> fielError.getDefaultMessage()).toList());
+            throw new ValidationException(bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toList());
         }
         return this.usersService.createUser(body);
     }
@@ -38,6 +39,9 @@ public class UsersController {
     public User getUserById(@PathVariable("user_id") UUID userId){
         return this.usersService.getUserById(userId);
     }
+
+    @GetMapping("/user_username")
+    public User getUserByUsername(@RequestParam("username") String username){ return this.usersService.getUserByUsername(username);}
 
     @PutMapping("/{user_id}")
     public User updateUser(@PathVariable("user_id") UUID userId, @RequestBody NewUsersDTO body){

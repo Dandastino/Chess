@@ -5,6 +5,7 @@ import dandastino.chess.games.Game;
 import dandastino.chess.messages.Message;
 import dandastino.chess.moves.Move;
 import dandastino.chess.user_settings.UserSetting;
+import dandastino.chess.utility.Country;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -129,7 +130,7 @@ public class User {
     }
 
     public void setElo_rating(int elo_rating) {
-        this.elo_rating = elo_rating;
+        this.elo_rating = 800;
     }
 
     public void setCreated_at(LocalDateTime created_at) {

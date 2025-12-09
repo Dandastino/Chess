@@ -1,4 +1,4 @@
-package dandastino.chess.Auth;
+package dandastino.chess.auth;
 
 import dandastino.chess.exceptions.UnauthorizeException;
 import jakarta.servlet.FilterChain;

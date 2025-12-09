@@ -1,4 +1,4 @@
-package dandastino.chess.Auth;
+package dandastino.chess.auth;
 
 public record AuthResponseDTO(String accessToken) {
 

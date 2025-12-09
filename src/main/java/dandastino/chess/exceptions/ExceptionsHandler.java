@@ -29,10 +29,15 @@ public class ExceptionsHandler {
         return new ErrorDTO("Internal server error", LocalDateTime.now());
     }
 
-
     @ExceptionHandler(UnauthorizeException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED) //401
     public ErrorDTO handleUnauthorizeException(Exception ex) {
+        return new ErrorDTO(ex.getMessage(), LocalDateTime.now());
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.CONFLICT) //409
+    public ErrorDTO handleConflictException(Exception ex) {
         return new ErrorDTO(ex.getMessage(), LocalDateTime.now());
     }
 }

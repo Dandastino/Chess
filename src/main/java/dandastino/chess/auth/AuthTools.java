@@ -1,4 +1,4 @@
-package dandastino.chess.Auth;
+package dandastino.chess.auth;
 
 import dandastino.chess.users.User;
 import io.jsonwebtoken.security.Keys;
