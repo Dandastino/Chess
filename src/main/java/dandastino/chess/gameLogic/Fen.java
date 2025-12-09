@@ -1,10 +1,13 @@
 package dandastino.chess.gameLogic;
 
+import dandastino.chess.piece.Piece;
+import dandastino.chess.piece.PieceFactory;
+
 public class Fen {
     private Board board;        // 8x8 board
     private boolean whiteToMove;
-    private CastlingRights castlingRights;
-    private EnPassantSquare enPassantSquare;
+    private String castlingRights;
+    private String enPassantSquare;
     private int halfmoveClock;
     private int fullmoveNumber;
 
@@ -17,21 +20,23 @@ public class Fen {
 
         // 1. Board
         Board board = new Board();
+        this.board = board;
         String[] ranks = parts[0].split("/");
 
         for (int row = 0; row < 8; row++) {
             int col = 0;
             for (char c : ranks[row].toCharArray()) {
                 if (Character.isDigit(c)) {
-                    int empty = Character.getNumericValue(c);
-                    for (int i = 0; i < empty; i++) {
-                        board[row][col++] = '.';
-                    }
+                    // FEN numbers represent empty squares, which are 'null' in a Piece[][]
+                    col += Character.getNumericValue(c);
                 } else {
-                    board[row][col++] = c;
+                    // Need a method to convert FEN char to a Piece object
+                    Piece piece = PieceFactory.fromFenChar(c); // <--- NEW HELPER METHOD NEEDED
+                    board.setPiece(row, col++, piece);
                 }
             }
         }
+        this.board = board; // Assign the initialized board to the instance field
 
         // 2. Side to move
         whiteToMove = parts[1].equals("w");
@@ -56,14 +61,16 @@ public class Fen {
         for (int row = 0; row < 8; row++) {
             int empty = 0;
             for (int col = 0; col < 8; col++) {
-                char piece = board[row][col];
-                if (piece == '.') empty++;
-                else {
+                Piece piece = board.getPieceAt(row, col); // Use the getter method
+                if (piece == null) { // Check for null (empty square)
+                    empty++;
+                } else {
                     if (empty > 0) {
                         sb.append(empty);
                         empty = 0;
                     }
-                    sb.append(piece);
+                    // Need a method on the Piece to get its FEN character
+                    sb.append(piece.getFenChar()); // <--- NEW METHOD NEEDED on Piece class
                 }
             }
             if (empty > 0) sb.append(empty);
@@ -83,6 +90,8 @@ public class Fen {
 
         return sb.toString();
     }
+
+
 
     // getters/setters for board and metadata
 }

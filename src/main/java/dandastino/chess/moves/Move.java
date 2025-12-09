@@ -20,10 +20,10 @@ public class Move {
     private int moveNumber;
     @Column(name = "san_move")
     private String sanMove;
-    private char startRow;
-    private char endRow;
-    private char startCol;
-    private char endCol;
+    private int startRow;
+    private int endRow;
+    private int startCol;
+    private int endCol;
     private PieceType pieceType;
     @Column(name = "fen_after_move")
     private String fenAfterMove;
@@ -82,7 +82,7 @@ public class Move {
         return startRow;
     }
 
-    public void setStartRow(char startRow) {
+    public void setStartRow(int startRow) {
         this.startRow = startRow;
     }
 
@@ -90,7 +90,7 @@ public class Move {
         return endRow;
     }
 
-    public void setEndRow(char endRow) {
+    public void setEndRow(int endRow) {
         this.endRow = endRow;
     }
 
@@ -98,7 +98,7 @@ public class Move {
         return startCol;
     }
 
-    public void setStartCol(char startCol) {
+    public void setStartCol(int startCol) {
         this.startCol = startCol;
     }
 
@@ -106,7 +106,7 @@ public class Move {
         return endCol;
     }
 
-    public void setEndCol(char endCol) {
+    public void setEndCol(int endCol) {
         this.endCol = endCol;
     }
 
