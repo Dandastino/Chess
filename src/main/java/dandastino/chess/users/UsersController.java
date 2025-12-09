@@ -1,7 +1,6 @@
 package dandastino.chess.users;
 
 import dandastino.chess.exceptions.ValidationException;
-import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;

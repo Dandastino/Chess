@@ -32,7 +32,8 @@ build/
 ### VS Code ###
 .vscode/
 
-### FOLDER ###
+### Folders ###
 Image
 
-env.properties
+### Env ###
+./env.properties

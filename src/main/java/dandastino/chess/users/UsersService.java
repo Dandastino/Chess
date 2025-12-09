@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.naming.NameNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -76,5 +77,10 @@ public class UsersService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
+    public User findByUsername(String username) {
+        return this.users_repo.findByUsername(username).orElseThrow(() -> new NotFoundException("The user with username " + username + "is does not exist "));
+    }
+
 }

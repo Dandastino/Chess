@@ -28,4 +28,11 @@ public class ExceptionsHandler {
         ex.printStackTrace();
         return new ErrorDTO("Internal server error", LocalDateTime.now());
     }
+
+
+    @ExceptionHandler(UnauthorizeException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED) //401
+    public ErrorDTO handleUnauthorizeException(Exception ex) {
+        return new ErrorDTO(ex.getMessage(), LocalDateTime.now());
+    }
 }
