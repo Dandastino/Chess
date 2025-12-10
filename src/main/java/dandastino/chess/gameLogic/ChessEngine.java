@@ -11,9 +11,9 @@ public class ChessEngine {
 
     public boolean isCheck(){}
 
-    public boolean isIllegalMove(){}
-
     public String generateNewFen(){}
+
+    public boolean isDraw(){}
 
     public MoveDTO makeMove(String from, String to){}
 }

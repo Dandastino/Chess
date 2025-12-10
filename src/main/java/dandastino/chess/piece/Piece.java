@@ -8,7 +8,7 @@ public class Piece implements Cloneable {
     public Piece(PieceType type, Color color, boolean hasMoved) {
         this.type = type;
         this.color = color;
-        hasMoved = hasMoved;
+        this.hasMoved= hasMoved;
     }
 
     public PieceType getType() {

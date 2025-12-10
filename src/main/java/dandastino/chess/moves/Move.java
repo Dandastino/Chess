@@ -15,7 +15,8 @@ public class Move {
 
     @Id
     @GeneratedValue
-    private UUID move_id;
+    @Column(name = "moveId")
+    private UUID moveId;
     @Column(name = "move_number")
     private int moveNumber;
     @Column(name = "san_move")
@@ -49,6 +50,12 @@ public class Move {
 
     public Move(){}
 
+    public Move(int startRow, int startCol, int endRow, int endCol) {
+        this.startRow = startRow;
+        this.startCol = startCol;
+        this.endRow = endRow;
+        this.endCol = endCol;
+    }
 
     public User getUserMove() {
         return userMove;
@@ -58,8 +65,8 @@ public class Move {
         this.userMove = userMove;
     }
 
-    public UUID getMove_id() {
-        return move_id;
+    public UUID getMoveId() {
+        return moveId;
     }
 
     public int getMoveNumber() {

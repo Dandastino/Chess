@@ -8,8 +8,8 @@ public class Fen {
     private boolean whiteToMove;
     private String castlingRights;
     private String enPassantSquare;
-    private int halfmoveClock;
-    private int fullmoveNumber;
+    private int halfMoveClock;
+    private int fullMoveNumber;
 
     public Fen(String fen) {
         parseFen(fen);
@@ -18,9 +18,19 @@ public class Fen {
     private void parseFen(String fen) {
         String[] parts = fen.split(" ");
 
-        // 1. Board
         Board board = new Board();
         this.board = board;
+        rank(parts, board);
+
+        this.board = board;
+        whiteToMove = parts[1].equals("w");
+        castlingRights = parts[2];
+        enPassantSquare = parts[3];
+        halfMoveClock = Integer.parseInt(parts[4]);
+        fullMoveNumber = Integer.parseInt(parts[5]);
+    }
+
+    static void rank(String[] parts, Board board) {
         String[] ranks = parts[0].split("/");
 
         for (int row = 0; row < 8; row++) {
@@ -31,68 +41,101 @@ public class Fen {
                     col += Character.getNumericValue(c);
                 } else {
                     // Need a method to convert FEN char to a Piece object
-                    Piece piece = PieceFactory.fromFenChar(c); // <--- NEW HELPER METHOD NEEDED
+                    Piece piece = PieceFactory.fromFenChar(c);
                     board.setPiece(row, col++, piece);
                 }
             }
         }
-        this.board = board; // Assign the initialized board to the instance field
-
-        // 2. Side to move
-        whiteToMove = parts[1].equals("w");
-
-        // 3. Castling
-        castlingRights = parts[2];
-
-        // 4. En passant
-        enPassantSquare = parts[3];
-
-        // 5. Halfmove clock
-        halfmoveClock = Integer.parseInt(parts[4]);
-
-        // 6. Fullmove number
-        fullmoveNumber = Integer.parseInt(parts[5]);
     }
 
     public String toFenString() {
+        stringBuilder(board);
+
+        return " " +
+                (whiteToMove ? "w" : "b") +
+                " " +
+                castlingRights +
+                " " +
+                enPassantSquare +
+                " " +
+                halfMoveClock +
+                " " +
+                fullMoveNumber;
+    }
+
+    static void stringBuilder(Board board) {
         StringBuilder sb = new StringBuilder();
 
-        // Board → FEN
         for (int row = 0; row < 8; row++) {
             int empty = 0;
             for (int col = 0; col < 8; col++) {
                 Piece piece = board.getPieceAt(row, col); // Use the getter method
-                if (piece == null) { // Check for null (empty square)
+                if (piece == null) {
                     empty++;
                 } else {
                     if (empty > 0) {
                         sb.append(empty);
                         empty = 0;
                     }
-                    // Need a method on the Piece to get its FEN character
-                    sb.append(piece.getFenChar()); // <--- NEW METHOD NEEDED on Piece class
+                    sb.append(piece.getFenChar());
                 }
             }
             if (empty > 0) sb.append(empty);
             if (row < 7) sb.append('/');
         }
-
-        sb.append(" ")
-                .append(whiteToMove ? "w" : "b")
-                .append(" ")
-                .append(castlingRights)
-                .append(" ")
-                .append(enPassantSquare)
-                .append(" ")
-                .append(halfmoveClock)
-                .append(" ")
-                .append(fullmoveNumber);
-
-        return sb.toString();
     }
 
+    public Board getBoard() {
+        return board;
+    }
 
+    public void setBoard(Board board) {
+        this.board = board;
+    }
 
-    // getters/setters for board and metadata
+    public boolean isWhiteToMove() {
+        return whiteToMove;
+    }
+
+    public void setWhiteToMove(boolean whiteToMove) {
+        this.whiteToMove = whiteToMove;
+    }
+
+    public String getCastlingRights() {
+        return castlingRights;
+    }
+
+    public void setCastlingRights(String castlingRights) {
+        this.castlingRights = castlingRights;
+    }
+
+    public String getEnPassantSquare() {
+        return enPassantSquare;
+    }
+
+    public void setEnPassantSquare(String enPassantSquare) {
+        this.enPassantSquare = enPassantSquare;
+    }
+
+    public int getHalfMoveClock() {
+        return halfMoveClock;
+    }
+
+    public void setHalfMoveClock(int halfMoveClock) {
+        this.halfMoveClock = halfMoveClock;
+    }
+
+    public int getFullMoveNumber() {
+        return fullMoveNumber;
+    }
+
+    public void setFullMoveNumber(int fullMoveNumber) {
+        this.fullMoveNumber = fullMoveNumber;
+    }
+
+    @Override
+    public String toString() {
+        return toFenString();
+    }
 }
 
