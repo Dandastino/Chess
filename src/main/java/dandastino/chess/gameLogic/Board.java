@@ -67,12 +67,11 @@ public class Board {
             handleCastlingMove(fromRow, fromCol, toRow, toCol);
         }
 
-        // En Passant Capture (Requires updating the captured square)
         // Checks if the move is a diagonal pawn move to an empty square that matches the enPassantSquare.
         if (pieceToMove.getType().equals(PieceType.PAWN) && toCol != fromCol && capturedPiece == null &&
                 BoardUtils.toChessNotation(toRow, toCol).equals(this.enPassantSquare)) {
 
-            // The piece captured during en passant is the one behind the target square.
+            // The captured pawn is on the row of the original pawn and the column of the destination.
             squares[fromRow][toCol] = null;
         }
 

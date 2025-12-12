@@ -225,7 +225,7 @@ public class MoveValidator {
         return true;
     }
 
-    private boolean isSquareAttacked(Board board, int targetRow, int targetCol, Color attackingColor) {
+    boolean isSquareAttacked(Board board, int targetRow, int targetCol, Color attackingColor) {
         for (int r = 0; r < 8; r++){
             for (int c = 0; c < 8; c++){
                 Piece attacker = board.getPieceAt(r, c);

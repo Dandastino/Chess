@@ -1,4 +1,4 @@
-package dandastino.chess.gameLogic;
+package dandastino.chess.moves;
 
 public record MoveDTO(
         String oldFen,
