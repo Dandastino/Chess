@@ -15,6 +15,11 @@ public class Fen {
         parseFen(fen);
     }
 
+    /**
+     * Translate a FEN string and sets up the entire state of the game.
+     *
+     * @param fen a string that represents the current state of the game
+     */
     private void parseFen(String fen) {
         String[] parts = fen.split(" ");
 
@@ -30,6 +35,12 @@ public class Fen {
         fullMoveNumber = Integer.parseInt(parts[5]);
     }
 
+    /**
+     * Parses the rank data in FEN notation and populates the provided board's pieces for each row.
+     *
+     * @param parts an array of strings representing parts of the FEN notation, where the first element contains the rank specification
+     * @param board the chess board to be updated with pieces as defined by the FEN rank data
+     */
     static void rank(String[] parts, Board board) {
         String[] ranks = parts[0].split("/");
 
@@ -48,6 +59,13 @@ public class Fen {
         }
     }
 
+    /**
+     * Converts the current state of the chess game into a FEN (Forsyth-Edwards Notation) string.
+     * The FEN string includes the board position, active player turn, castling rights, en passant target square,
+     * halfmove clock, and fullmove number.
+     *
+     * @return a string representing the current game state in FEN notation
+     */
     public String toFenString() {
         stringBuilder(board);
 
@@ -63,6 +81,14 @@ public class Fen {
                 fullMoveNumber;
     }
 
+    /**
+     * Constructs a FEN-compatible segment of a chessboard's current state using a {@link StringBuilder}.
+     * This method iterates through the rows and columns of the board, representing pieces
+     * in Forsyth-Edwards Notation (FEN) format. It counts empty squares and appends the
+     * respective values to the StringBuilder for later use in constructing a FEN string.
+     *
+     * @param board the chessboard instance from which the current position is to be processed
+     */
     static void stringBuilder(Board board) {
         StringBuilder sb = new StringBuilder();
 

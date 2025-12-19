@@ -1,13 +1,15 @@
-package dandastino.chess.piece;
-
-// Assuming you have a simple helper class/record to hold coordinates, e.g., Coordinate(int row, int col)
+package dandastino.chess.gameLogic;
 
 import dandastino.chess.moves.Move;
 
 public class BoardUtils {
 
+
     /**
      * Converts 0-indexed (row, col) coordinates to algebraic chess notation (e.g., "e4").
+     * @param row
+     * @param col
+     * @return the chess annotation
      */
     public static String toChessNotation(int row, int col) {
         // 0 -> 'a', 7 -> 'h'
@@ -19,7 +21,8 @@ public class BoardUtils {
 
     /**
      * Converts algebraic chess notation (e.g., "e4") to 0-indexed (row, col) coordinates.
-     * Throws an exception for invalid notation.
+     * @param notation
+     * @return the coordinates
      */
     public static int[] toCoordinates(String notation) {
         if (notation == null || notation.length() != 2) {
@@ -44,6 +47,12 @@ public class BoardUtils {
         return new int[]{row, col};
     }
 
+    /**
+     * Creates a Move object from algebraic chess notation (e.g., "e4").
+     * @param from
+     * @param to
+     * @return the Move object
+     */
     public static Move toMoveObject(String from, String to) {
         // 1. Convert 'from' notation (e.g., "e2") to coordinates {row, col}
         int[] startCoords = toCoordinates(from);

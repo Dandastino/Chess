@@ -20,6 +20,7 @@ public class AuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+            // Authentication
             String token = request.getHeader("Authorization");
 
             if (token == null || !token.startsWith("Bearer ")) {throw new UnauthorizeException("Invalid token");}
@@ -27,6 +28,10 @@ public class AuthFilter extends OncePerRequestFilter {
             String accessToken = token.replace("Bearer", "");
 
             authComponent.validateToken(accessToken);
+
+            // Authorization
+
+            filterChain.doFilter(request, response);
 
         }catch (UnauthorizeException e){
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "problem with the token: " + e.getMessage());

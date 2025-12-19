@@ -7,14 +7,18 @@ import dandastino.chess.moves.Move;
 import dandastino.chess.userSettings.UserSetting;
 import dandastino.chess.utility.Country;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Table(name="users")
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID user_id;
@@ -26,7 +30,7 @@ public class User {
     private String password;
     @Column(nullable = false)
     private int elo_rating;
-    @Column(nullable = false)
+    @Column (nullable = false)
     private LocalDateTime created_at;
     private String avatar_url;
     private String bio;
@@ -81,12 +85,18 @@ public class User {
         return user_id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public String getEmail() {
         return email;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(this.type.name()));
+    }
+
+    @Override
+    public String getUsername(){
+        return this.username;
     }
 
     public String getPassword() {
@@ -173,7 +183,7 @@ public class User {
     }
 
     public void setType(UserType type) {
-        this.type = type;
+        this.type = UserType.HUMAN;
     }
 
     public List<Friend> getFriend1() {
