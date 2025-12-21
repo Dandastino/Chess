@@ -60,6 +60,14 @@ No need for Python unless you want more complex ML. This project integrates AI d
 - [ ] Store move history & PGN export
 - [ ] Real-time updates using Spring WebSockets
 
+## ♟️ Game Logic (current backend)
+- Full FEN parsing/rendering with castling, en-passant, move clocks.
+- Move validation per piece, including castling and en-passant guards.
+- Pseudo-legal move generation and safety checks (king-in-check, checkmate/stalemate detection).
+- SAN move generation (including check/checkmate markers).
+- Board copy helpers to simulate future positions safely.
+- Piece factory infers castling eligibility and pawn first-move state from FEN.
+
 ### Phase 2 — AI Chess Analysis (Advanced Version)
 - [ ] Stockfish engine integration (UCI)
 - [ ] FEN → evaluation score per move

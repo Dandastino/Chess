@@ -13,15 +13,17 @@ public class Friend {
 
     @Id
     @GeneratedValue
+    @Column(name = "friendship_id")
     private UUID friendship_id;
+    @Column(name = "created_at")
     private LocalDateTime created_at;
 
     @ManyToOne
-    @JoinColumn(name = "requester_id")
+    @JoinColumn(name = "user1_id")
     private User friend1;
 
     @ManyToOne
-    @JoinColumn(name = "receiver_id")
+    @JoinColumn(name = "user2_id")
     private User friend2;
 
     public Friend(){}

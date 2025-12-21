@@ -12,6 +12,7 @@ public class GameOpening {
 
     @Id
     @GeneratedValue
+    @Column(name = "game_openings_id")
     private UUID game_opening_id;
 
     @ManyToOne
@@ -27,6 +28,14 @@ public class GameOpening {
     public GameOpening(Opening opening, Game game) {
         this.opening = opening;
         this.game = game;
+    }
+
+    public UUID getGame_opening_id() {
+        return game_opening_id;
+    }
+
+    public void setGame_opening_id(UUID game_opening_id) {
+        this.game_opening_id = game_opening_id;
     }
 
     public Game getGame() {

@@ -15,26 +15,31 @@ public class Move {
 
     @Id
     @GeneratedValue
-    @Column(name = "moveId")
+    @Column(name = "move_id")
     private UUID moveId;
     @Column(name = "move_number")
     private int moveNumber;
     @Column(name = "san_move")
     private String sanMove;
+    @Column(name = "from_square")
+    private String fromSquare;
+    @Column(name = "to_square")
+    private String toSquare;
     private int startRow;
     private int endRow;
     private int startCol;
     private int endCol;
+    @Enumerated(EnumType.STRING)
     private PieceType pieceType;
     @Column(name = "fen_after_move")
     private String fenAfterMove;
     private LocalDateTime timestamp;
     @Column(name = "time_spent_ms")
     private int timeSpentMs;
-    @Column(name = "isCheck")
+    @Column(name = "is_check")
     private boolean isCheck;
-    @Column(name = "is_checkmate")
-    private boolean isCheckmate;
+    @Column(name = "is_mate")
+    private boolean isMate;
 
     @OneToOne
     @JoinColumn(name = "move_analysis_id")
@@ -45,7 +50,7 @@ public class Move {
     private Game gameAnalysis;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "player_id")
     private User userMove;
 
     public Move(){}
@@ -157,12 +162,28 @@ public class Move {
         isCheck = check;
     }
 
-    public boolean isCheckmate() {
-        return isCheckmate;
+    public boolean isMate() {
+        return isMate;
     }
 
-    public void setCheckmate(boolean checkmate) {
-        isCheckmate = checkmate;
+    public void setMate(boolean mate) {
+        isMate = mate;
+    }
+
+    public String getFromSquare() {
+        return fromSquare;
+    }
+
+    public void setFromSquare(String fromSquare) {
+        this.fromSquare = fromSquare;
+    }
+
+    public String getToSquare() {
+        return toSquare;
+    }
+
+    public void setToSquare(String toSquare) {
+        this.toSquare = toSquare;
     }
 
     public MoveAnalysis getMoveAnalysis() {

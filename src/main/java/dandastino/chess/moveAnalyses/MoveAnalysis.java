@@ -11,11 +11,16 @@ public class MoveAnalysis {
 
     @Id
     @GeneratedValue
+    @Column(name = "move_analysis_id")
     private UUID move_analysis_id;
+    @Column(name = "evaluation_cp")
     private String evaluation_cp;
+    @Column(name = "best_move")
     private String best_move;
-    private int deph;
+    @Column(name = "depth")
+    private int depth;
     @Enumerated(EnumType.STRING)
+    @Column(name = "review")
     private Review review;
 
     @OneToOne(mappedBy = "moveAnalysis")
@@ -24,10 +29,10 @@ public class MoveAnalysis {
 
     public MoveAnalysis(){}
 
-    public MoveAnalysis(Move move, Review review, int deph, String best_move, String evaluation_cp) {
+    public MoveAnalysis(Move move, Review review, int depth, String best_move, String evaluation_cp) {
         this.move = move;
         this.review = review;
-        this.deph = deph;
+        this.depth = depth;
         this.best_move = best_move;
         this.evaluation_cp = evaluation_cp;
     }
@@ -52,12 +57,12 @@ public class MoveAnalysis {
         this.best_move = best_move;
     }
 
-    public int getDeph() {
-        return deph;
+    public int getDepth() {
+        return depth;
     }
 
-    public void setDeph(int deph) {
-        this.deph = deph;
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 
     public Review getReview() {
@@ -82,7 +87,7 @@ public class MoveAnalysis {
                 "move_analysis_id=" + move_analysis_id +
                 ", evaluation_cp='" + evaluation_cp + '\'' +
                 ", best_move='" + best_move + '\'' +
-                ", deph=" + deph +
+                ", depth=" + depth +
                 ", review=" + review +
                 ", move=" + move +
                 '}';

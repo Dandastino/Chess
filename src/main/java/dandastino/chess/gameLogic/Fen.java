@@ -51,8 +51,7 @@ public class Fen {
                     // FEN numbers represent empty squares, which are 'null' in a Piece[][]
                     col += Character.getNumericValue(c);
                 } else {
-                    // Need a method to convert FEN char to a Piece object
-                    Piece piece = PieceFactory.fromFenChar(c);
+                    Piece piece = PieceFactory.fromFenChar(c, row, col, parts[2]);
                     board.setPiece(row, col++, piece);
                 }
             }
@@ -67,9 +66,10 @@ public class Fen {
      * @return a string representing the current game state in FEN notation
      */
     public String toFenString() {
-        stringBuilder(board);
+        String boardPart = stringBuilder(board);
 
-        return " " +
+        return boardPart +
+                " " +
                 (whiteToMove ? "w" : "b") +
                 " " +
                 castlingRights +
@@ -89,7 +89,7 @@ public class Fen {
      *
      * @param board the chessboard instance from which the current position is to be processed
      */
-    static void stringBuilder(Board board) {
+    static String stringBuilder(Board board) {
         StringBuilder sb = new StringBuilder();
 
         for (int row = 0; row < 8; row++) {
@@ -109,6 +109,8 @@ public class Fen {
             if (empty > 0) sb.append(empty);
             if (row < 7) sb.append('/');
         }
+
+        return sb.toString();
     }
 
     public Board getBoard() {

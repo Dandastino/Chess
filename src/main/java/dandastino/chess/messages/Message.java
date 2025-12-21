@@ -13,11 +13,14 @@ public class Message {
 
     @Id
     @GeneratedValue
+    @Column(name = "message_id")
     private UUID message_id;
+    @Column(name = "content")
     private String content;
-    private LocalDateTime created_at;
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
     @ManyToOne
-    @JoinColumn(name = "sender_id")
+    @JoinColumn(name = "user_id")
     private User sender;
     @ManyToOne
     @JoinColumn(name = "game_id")
@@ -25,10 +28,10 @@ public class Message {
 
     public Message(){}
 
-    public Message(UUID message_id, String content, LocalDateTime created_at, User sender, Game game) {
+    public Message(UUID message_id, String content, LocalDateTime timestamp, User sender, Game game) {
         this.message_id = message_id;
         this.content = content;
-        this.created_at = created_at;
+        this.timestamp = timestamp;
         this.sender = sender;
         this.game = game;
     }
@@ -45,12 +48,12 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 
     public User getSender() {
@@ -74,7 +77,7 @@ public class Message {
         return "Message{" +
                 "message_id=" + message_id +
                 ", content='" + content + '\'' +
-                ", created_at=" + created_at +
+                ", timestamp=" + timestamp +
                 ", sender=" + sender +
                 ", game=" + game +
                 '}';

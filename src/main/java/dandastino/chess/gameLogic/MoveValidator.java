@@ -105,8 +105,8 @@ public class MoveValidator {
         int rowDifference = endRow - startRow;
         int colDifference = Math.abs(endCol - startCol);
 
-        // Fail fast if not moving forward
-        if (rowDifference * direction > 0) return false;
+        // Fail fast if moving backward relative to the pawn's color
+        if (rowDifference * direction < 0) return false;
 
         Piece targetPiece = board.getPieceAt(endRow, endCol);
 

@@ -12,13 +12,21 @@ public class UserSetting {
 
     @Id
     @GeneratedValue
-    private UUID userSetting;
+    @Column(name = "user_setting_id")
+    private UUID user_setting_id;
+    @Column(name = "theme")
     private String theme;
+    @Column(name = "preferred_time_control")
     private String preferred_time_control;
+    @Column(name = "language")
     private String language;
+    @Column(name = "allow_engine_analysis")
     private boolean allow_engine_analysis;
+    @Column(name = "show_move_suggestions")
     private boolean show_move_suggestions;
+    @Column(name = "notifications_enabled")
     private boolean notifications_enabled;
+    @Column(name = "created_at")
     private LocalDateTime created_at;
 
     @OneToOne
@@ -27,19 +35,22 @@ public class UserSetting {
 
     public UserSetting(){}
 
-    public UserSetting(LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme, UUID userSetting1) {
+    public UserSetting(LocalDateTime created_at, boolean notifications_enabled, boolean show_move_suggestions, boolean allow_engine_analysis, String language, String preferred_time_control, String theme) {
         this.created_at = created_at;
-        this.notifications_enabled = true;
-        this.show_move_suggestions = true;
-        this.allow_engine_analysis = true;
+        this.notifications_enabled = notifications_enabled;
+        this.show_move_suggestions = show_move_suggestions;
+        this.allow_engine_analysis = allow_engine_analysis;
         this.language = language;
         this.preferred_time_control = preferred_time_control;
         this.theme = theme;
-        this.userSetting = userSetting1;
     }
 
-    public UUID getUserSetting() {
-        return userSetting;
+    public UUID getUser_setting_id() {
+        return user_setting_id;
+    }
+
+    public void setUser_setting_id(UUID user_setting_id) {
+        this.user_setting_id = user_setting_id;
     }
 
     public String getTheme() {

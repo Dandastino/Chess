@@ -1,8 +1,5 @@
 package dandastino.chess.gameLogic;
 
-import dandastino.chess.piece.Piece;
-import dandastino.chess.piece.PieceFactory; // Assuming this helper is defined
-
 public class FenParser {
 
     /**
@@ -34,9 +31,10 @@ public class FenParser {
      * @return a FEN string representation of the given chessboard state
      */
     public static String toFen(Board board) {
-        Fen.stringBuilder(board);
+        String boardPart = Fen.stringBuilder(board);
 
-        return " " +
+        return boardPart +
+                " " +
                 (board.isWhiteToMove() ? "w" : "b") +
                 " " +
                 board.getCastlingRights() +

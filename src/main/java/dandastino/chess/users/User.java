@@ -26,7 +26,7 @@ public class User implements UserDetails {
     private String username;
     @Column(unique = true, nullable = false, name = "email")
     private String email;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "password_hash")
     private String password;
     @Column(nullable = false)
     private int elo_rating;
@@ -140,7 +140,7 @@ public class User implements UserDetails {
     }
 
     public void setElo_rating(int elo_rating) {
-        this.elo_rating = 800;
+        this.elo_rating = elo_rating;
     }
 
     public void setCreated_at(LocalDateTime created_at) {
@@ -183,7 +183,7 @@ public class User implements UserDetails {
     }
 
     public void setType(UserType type) {
-        this.type = UserType.HUMAN;
+        this.type = type;
     }
 
     public List<Friend> getFriend1() {
@@ -256,5 +256,25 @@ public class User implements UserDetails {
 
     public void setUserMove(List<Move> userMove) {
         this.userMove = userMove;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

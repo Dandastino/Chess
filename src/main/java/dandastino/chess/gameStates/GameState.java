@@ -11,11 +11,17 @@ public class GameState {
 
     @Id
     @GeneratedValue
+    @Column(name = "game_state_id")
     private UUID game_state_id;
+    @Column(name = "move_number")
     private String move_number;
+    @Column(name = "fen")
     private String fen;
+    @Column(name = "evaluation_cp")
     private int evaluation_cp;
+    @Column(name = "best_move")
     private String best_move;
+    @Column(name = "analysis_json")
     private String analysis_json;
     @ManyToOne
     @JoinColumn(name = "game_id")

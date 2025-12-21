@@ -13,9 +13,13 @@ public class CheatingAnalysis {
 
     @Id
     @GeneratedValue
+    @Column(name = "cheating_analisys_id")
     private UUID cheating_analysis_id;
-    private double match_accuracy_percentage;
+    @Column(name = "match_accuracy_perc")
+    private double match_accuracy_perc;
+    @Column(name = "suspicion_score")
     private double suspicion_score;
+    @Column(name = "created_at")
     private LocalDateTime created_at;
     @ManyToOne
     @JoinColumn(name = "game_id")
@@ -26,9 +30,9 @@ public class CheatingAnalysis {
 
     public CheatingAnalysis(){}
 
-    public CheatingAnalysis(UUID cheating_analysis_id, double match_accuracy_percentage, double suspicion_score, LocalDateTime created_at, Game cheating_game, User cheating_user) {
+    public CheatingAnalysis(UUID cheating_analysis_id, double match_accuracy_perc, double suspicion_score, LocalDateTime created_at, Game cheating_game, User cheating_user) {
         this.cheating_analysis_id = cheating_analysis_id;
-        this.match_accuracy_percentage = match_accuracy_percentage;
+        this.match_accuracy_perc = match_accuracy_perc;
         this.suspicion_score = suspicion_score;
         this.created_at = created_at;
         this.cheating_game = cheating_game;
@@ -39,12 +43,12 @@ public class CheatingAnalysis {
         return cheating_analysis_id;
     }
 
-    public double getMatch_accuracy_percentage() {
-        return match_accuracy_percentage;
+    public double getMatch_accuracy_perc() {
+        return match_accuracy_perc;
     }
 
-    public void setMatch_accuracy_percentage(double match_accuracy_percentage) {
-        this.match_accuracy_percentage = match_accuracy_percentage;
+    public void setMatch_accuracy_perc(double match_accuracy_perc) {
+        this.match_accuracy_perc = match_accuracy_perc;
     }
 
     public double getSuspicion_score() {
@@ -83,7 +87,7 @@ public class CheatingAnalysis {
     public String toString() {
         return "CheatingAnalysis{" +
                 "cheating_analysis_id=" + cheating_analysis_id +
-                ", match_accuracy_percentage=" + match_accuracy_percentage +
+                ", match_accuracy_perc=" + match_accuracy_perc +
                 ", suspicion_score=" + suspicion_score +
                 ", created_at=" + created_at +
                 ", cheating_game=" + cheating_game +

@@ -1,13 +1,11 @@
 package dandastino.chess.games;
 
 import dandastino.chess.cheatingAnalyses.CheatingAnalysis;
-import dandastino.chess.friends.Friend;
 import dandastino.chess.gameStates.GameState;
 import dandastino.chess.gamesOpenings.GameOpening;
 import dandastino.chess.messages.Message;
 import dandastino.chess.users.User;
 import jakarta.persistence.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,52 +17,58 @@ public class Game {
 
     @Id
     @GeneratedValue
-    private UUID game_id;
+    @Column(name = "game_id")
+    private UUID gameId;
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private Status status;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+    @Column(name = "finished_at")
+    private LocalDateTime finishedAt;
     @Enumerated(EnumType.STRING)
+    @Column(name = "result")
     private Result result;
-    private String time_control;
-    private String initital_fen;
-    private String final_fen;
-    private boolean is_bot_game;
+    @Column(name = "time_control")
+    private String timeControl;
+    @Column(name = "initial_fen")
+    private String initialFen;
+    @Column(name = "final_fen")
+    private String finalFen;
+    @Column(name = "is_bot_game")
+    private boolean isBotGame;
+    @Column(name = "bot_difficulty")
     private int botDifficulty;
+
     @ManyToOne
-    @JoinColumn(name = "white_id", nullable = false)
+    @JoinColumn(name = "white_player_id", nullable = false)
     private User whitePlayer;
     @ManyToOne
-    @JoinColumn(name = "black_id", nullable = false)
+    @JoinColumn(name = "black_player_id", nullable = false)
     private User blackPlayer;
     @ManyToOne
     @JoinColumn(name = "winner_id", nullable = true)
     private User winner;
-
     @OneToMany(mappedBy = "game")
     private List<Message> messages;
-
     @OneToMany(mappedBy = "cheating_game")
-    private List<CheatingAnalysis> cheating_game;
-
+    private List<CheatingAnalysis> cheatingGame;
     @OneToMany(mappedBy = "game")
     private List<GameState> gameStates;
-
     @OneToMany(mappedBy = "game")
     private List<GameOpening> gameOpenings;
 
     public Game(){}
 
-    public Game(Status status, LocalDateTime created_at, LocalDateTime updated_at, Result result, String time_control, String initital_fen, String final_fen, boolean is_bot_game, int botDifficulty, User whitePlayer, User blackPlayer, User winner) {
-        this.game_id = game_id;
+    public Game(Status status, LocalDateTime createdAt, LocalDateTime finishedAt, Result result, String timeControl, String initialFen, String finalFen, boolean isBotGame, int botDifficulty, User whitePlayer, User blackPlayer, User winner) {
         this.status = status;
-        this.created_at = created_at;
-        this.updated_at = updated_at;
+        this.createdAt = createdAt;
+        this.finishedAt = finishedAt;
         this.result = result;
-        this.time_control = time_control;
-        this.initital_fen = initital_fen;
-        this.final_fen = final_fen;
-        this.is_bot_game = false;
+        this.timeControl = timeControl;
+        this.initialFen = initialFen;
+        this.finalFen = finalFen;
+        this.isBotGame = isBotGame;
         this.botDifficulty = botDifficulty;
         this.whitePlayer = whitePlayer;
         this.blackPlayer = blackPlayer;
@@ -72,7 +76,7 @@ public class Game {
     }
 
     public UUID getGame_id() {
-        return game_id;
+        return gameId;
     }
 
     public Status getStatus() {
@@ -83,20 +87,20 @@ public class Game {
         this.status = status;
     }
 
-    public LocalDateTime getCreated_at() {
-        return created_at;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
+    public LocalDateTime getFinishedAt() {
+        return finishedAt;
     }
 
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
+    public void setFinishedAt(LocalDateTime finishedAt) {
+        this.finishedAt = finishedAt;
     }
 
     public Result getResult() {
@@ -108,35 +112,35 @@ public class Game {
     }
 
     public String getTime_control() {
-        return time_control;
+        return timeControl;
     }
 
-    public void setTime_control(String time_control) {
-        this.time_control = time_control;
+    public void setTimeControl(String timeControl) {
+        this.timeControl = timeControl;
     }
 
-    public String getInitital_fen() {
-        return initital_fen;
+    public String getInitialFen() {
+        return initialFen;
     }
 
-    public void setInitital_fen(String initital_fen) {
-        this.initital_fen = initital_fen;
+    public void setInitialFen(String initialFen) {
+        this.initialFen = initialFen;
     }
 
-    public String getFinal_fen() {
-        return final_fen;
+    public String getFinalFen() {
+        return finalFen;
     }
 
-    public void setFinal_fen(String final_fen) {
-        this.final_fen = final_fen;
+    public void setFinalFen(String finalFen) {
+        this.finalFen = finalFen;
     }
 
-    public boolean isIs_bot_game() {
-        return is_bot_game;
+    public boolean getIsBotGame() {
+        return isBotGame;
     }
 
-    public void setIs_bot_game(boolean is_bot_game) {
-        this.is_bot_game = is_bot_game;
+    public void setIsBotGame(boolean isBotGame) {
+        this.isBotGame = isBotGame;
     }
 
     public int getBotDifficulty() {
@@ -174,15 +178,15 @@ public class Game {
     @Override
     public String toString() {
         return "Game{" +
-                "game_id=" + game_id +
+                "gameId=" + gameId +
                 ", status=" + status +
-                ", created_at=" + created_at +
-                ", updated_at=" + updated_at +
+                ", createdAt=" + createdAt +
+                ", finishedAt=" + finishedAt +
                 ", result=" + result +
-                ", time_control='" + time_control + '\'' +
-                ", initital_fen='" + initital_fen + '\'' +
-                ", final_fen='" + final_fen + '\'' +
-                ", is_bot_game=" + is_bot_game +
+                ", timeControl='" + timeControl + '\'' +
+                ", initialFen='" + initialFen + '\'' +
+                ", finalFen='" + finalFen + '\'' +
+                ", isBotGame=" + isBotGame +
                 ", botDifficulty=" + botDifficulty +
                 ", whitePlayer=" + whitePlayer +
                 ", blackPlayer=" + blackPlayer +
@@ -194,8 +198,8 @@ public class Game {
         return messages;
     }
 
-    public List<CheatingAnalysis> getCheating_game() {
-        return cheating_game;
+    public List<CheatingAnalysis> getCheatingGame() {
+        return cheatingGame;
     }
 
     public List<GameState> getGameStates() {
@@ -211,7 +215,7 @@ public class Game {
     }
 
     public void setCheating_game(List<CheatingAnalysis> cheating_game) {
-        this.cheating_game = cheating_game;
+        this.cheatingGame = cheating_game;
     }
 
     public void setGameStates(List<GameState> gameStates) {

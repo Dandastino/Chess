@@ -1,6 +1,5 @@
 package dandastino.chess.openings;
 
-import dandastino.chess.games.Game;
 import dandastino.chess.gamesOpenings.GameOpening;
 import jakarta.persistence.*;
 
@@ -13,10 +12,15 @@ public class Opening {
 
     @Id
     @GeneratedValue
+    @Column(name = "opening_id")
     private UUID opening_id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "eco_code")
     private String eco_code;
+    @Column(name = "fen_start")
     private String fen_start;
+    @Column(name = "moves")
     private String moves;
 
     @OneToMany(mappedBy = "opening")
