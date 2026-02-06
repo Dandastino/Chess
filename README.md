@@ -127,38 +127,17 @@ CLOUDINARY_SEC=your_api_secret
 
 **Stockfish (Chess AI):**
 ```properties
-stockfish.path=/usr/local/bin/stockfish     # macOS
-# stockfish.path=/usr/games/stockfish       # Linux
-# stockfish.path=C:\Program Files\Stockfish\stockfish.exe  # Windows
+stockfish.path=/usr/local/bin/stockfish                  # macOS
+stockfish.path=/usr/games/stockfish                      # Linux
+stockfish.path=C:\Program Files\Stockfish\stockfish.exe  # Windows
 ```
 
 ---
-
-## Running the Application
-
-### Option 1: Development Mode (with auto-reload)
-```powershell
-.\mvnw spring-boot:run
-```
-
-### Option 2: Build & Run JAR
-```bash
-# Clean build
-.\mvnw clean package -DskipTests
-
-# Run JAR
-java -jar target\chess-0.0.1-SNAPSHOT.jar
-```
-
-**Server will be available at:** `http://localhost:3001`
-
----
-
 ### Manual API Testing (Postman)
 
 **Import Steps:**
 1. Open Postman → Click "Import"
-2. Select the `postman_collection.json`
+2. Select the `postman/postman_collection.json`
 3. Set variables in Postman environment:
    - `baseURL`: http://localhost:3001
    - `accessToken`: (filled after login)
@@ -455,7 +434,7 @@ brew install stockfish
 sudo apt-get install stockfish
 
 # Windows 
-# Download from https://stockfishchess.org/
+Download from https://stockfishchess.org/
 ```
 
 **Move Analysis Service:**
