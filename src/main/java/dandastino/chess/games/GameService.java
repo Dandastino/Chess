@@ -44,6 +44,11 @@ public class GameService {
     }
 
     public GameResponseDTO createGame(GameDTO gameDTO, User author) {
+        // Only HUMAN users can create games, not BOT
+        if (author.getType().equals(dandastino.chess.users.UserType.BOT)) {
+            throw new ValidationException("Bots cannot create games");
+        }
+        
         User whitePlayer = null;
         User blackPlayer = null;
         

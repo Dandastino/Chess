@@ -166,13 +166,27 @@ public class StockfishEngine {
      */
     public void quit() {
         try {
-            sendCommand("quit");
-            if (stockfishProcess != null) {
-                stockfishProcess.waitFor();
+            if (stockfishProcess != null && stockfishProcess.isAlive()) {
+                try {
+                    sendCommand("quit");
+                    stockfishProcess.waitFor();
+                    logger.info("Stockfish engine terminated gracefully");
+                } catch (Exception e) {
+                    logger.warn("Could not send quit command, forcing termination: {}", e.getMessage());
+                    stockfishProcess.destroyForcibly();
+                }
+            } else {
+                logger.info("Stockfish process was already terminated");
             }
-            logger.info("Stockfish engine terminated");
         } catch (Exception e) {
-            logger.error("Error quitting Stockfish", e);
+            logger.error("Error during Stockfish shutdown", e);
+        } finally {
+            try {
+                if (stockfishInput != null) stockfishInput.close();
+                if (stockfishOutput != null) stockfishOutput.close();
+            } catch (Exception e) {
+                logger.debug("Error closing streams: {}", e.getMessage());
+            }
         }
     }
 

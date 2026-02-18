@@ -3,9 +3,12 @@ package dandastino.chess.moves;
 import dandastino.chess.exceptions.NotFoundException;
 import dandastino.chess.games.Game;
 import dandastino.chess.games.GamesRepository;
+import dandastino.chess.games.Status;
 import dandastino.chess.users.User;
 import dandastino.chess.users.UsersRepository;
 import dandastino.chess.websocket.GameBroadcastService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.util.UUID;
 
 @Service
 public class MoveService {
+    private static final Logger logger = LoggerFactory.getLogger(MoveService.class);
+    
     @Autowired
     private GamesRepository gamesRepository;
 
@@ -63,6 +68,14 @@ public class MoveService {
         move.setCheckmate(moveDTO.isCheckmate());
 
         Move saved = movesRepository.save(move);
+        
+        // If checkmate, automatically set game status to done
+        if (moveDTO.isCheckmate()) {
+            logger.info("Checkmate detected in game {}. Changing status to done.", game.getGame_id());
+            game.setStatus(Status.done);
+            gamesRepository.save(game);
+        }
+        
         MoveResponseDTO responseDTO = convertToDTO(saved);
         
         // Broadcast the move to all connected players via WebSocket

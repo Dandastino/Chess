@@ -31,6 +31,20 @@ public class CheatingDetectionService {
      * Analyze a completed game for cheating indicators
      */
     public CheatingAnalysis analyzeGame(Game game, List<Move> moves) {
+        // Skip analysis for bot games - bots cannot cheat
+        if (game.getIsBotGame()) {
+            logger.info("Skipping cheating analysis for bot game {}", game.getGame_id());
+            // Return null or create a dummy non-suspicious analysis
+            return createCheatingAnalysis(game, 0.0, 0.0);
+        }
+        
+        // Check if any player is a bot - skip analysis for human vs bot games
+        if ((game.getWhitePlayer() != null && game.getWhitePlayer().getType().equals(dandastino.chess.users.UserType.BOT)) ||
+            (game.getBlackPlayer() != null && game.getBlackPlayer().getType().equals(dandastino.chess.users.UserType.BOT))) {
+            logger.info("Skipping cheating analysis for game {} - contains bot player", game.getGame_id());
+            return createCheatingAnalysis(game, 0.0, 0.0);
+        }
+        
         // CRITICAL: Check if analysis already exists BEFORE any processing
         List<CheatingAnalysis> existingAnalyses = cheatingAnalysesRepository.findByGameId(game.getGame_id());
         if (!existingAnalyses.isEmpty()) {

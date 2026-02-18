@@ -17,7 +17,7 @@ public class MoveAnalysis {
     private String evaluation_cp;
     @Column(name = "best_move")
     private String best_move;
-    @Column(name = "depth")
+    @Column(name = "deph")
     private int depth;
     @Enumerated(EnumType.STRING)
     @Column(name = "review")

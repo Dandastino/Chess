@@ -1,0 +1,1779 @@
+{
+  "info": {
+    "_postman_id": "dc89870c-25e6-4c5f-ad35-f1e353882443",
+    "name": "Chess",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "register new user",
+          "id": "01170d0c-771d-41b8-8b77-4dd9ed823245",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"masseo\",\r\n    \"email\": \"dan22@example.com\",\r\n    \"password\": \"Password123!\",\r\n    \"bio\": \"Chess dev\",\r\n    \"country\": \"Italy\",\r\n    \"elo_rating\": 3000\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/users",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all users",
+          "id": "cf5730a4-eb00-4b97-bad9-b929e35cabd2",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTgzODUsImV4cCI6MTc3Mjg5MDM4NSwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.4x2uzyrhmkMAb72kdWfDPIRe8VXqC0fW3peuP5O798c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get single user",
+          "id": "1c1e1ea8-4726-4f26-9fcd-273e9c87f5d4",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTgzODUsImV4cCI6MTc3Mjg5MDM4NSwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.4x2uzyrhmkMAb72kdWfDPIRe8VXqC0fW3peuP5O798c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Top 100 players by Elo rating",
+          "id": "b484412c-243a-4fb2-8f50-51a99e48ff8f",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users/leaderboard",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "leaderboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "upload avatar",
+          "id": "75c039e1-c66d-4b68-819a-ec76dada2ae7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "avatar",
+                  "type": "file",
+                  "uuid": "2e76180f-ab3f-406d-a9a7-b08d25561f0b",
+                  "src": [
+                    "/C:/Users/sheri/OneDrive/Desktop/Me/Epicode/2nd year/Back End/chess/avatars/pirateCat.png"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/users/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d/avatar",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+                "avatar"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update user",
+          "id": "25e95cd3-e2a5-4418-b212-90ed9965797c",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTgzODUsImV4cCI6MTc3Mjg5MDM4NSwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.4x2uzyrhmkMAb72kdWfDPIRe8VXqC0fW3peuP5O798c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/users/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d?bio=chess devoe&elo_rating=1300&country=Egypt&email=da@gmail.com&password=Newpassword123%23",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ],
+              "query": [
+                {
+                  "key": "bio",
+                  "value": "chess devoe"
+                },
+                {
+                  "key": "elo_rating",
+                  "value": "1300"
+                },
+                {
+                  "key": "country",
+                  "value": "Egypt"
+                },
+                {
+                  "key": "email",
+                  "value": "da@gmail.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "Newpassword123#",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "9e39dfee-414b-49fa-95ae-c147c2950cb8"
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "login",
+          "id": "5baf857b-75ce-4d59-adab-02f325015851",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"alfonso\",\r\n    \"password\": \"Password123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/auth/login?username=dandastino&password=Password123!",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "dandastino"
+                },
+                {
+                  "key": "password",
+                  "value": "Password123!"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logut",
+          "id": "accd40e6-06b2-4fc2-bfaa-d99c8d4c8635",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTc2MTksImV4cCI6MTc3Mjg4OTYxOSwic3ViIjoiMmM0OWQ0ZjItYjBjZC00ZmM2LTk2MTYtODkzN2RjMTc0Yzc0In0.hVQRPpwNHKw9VSlS4_eUSRtTbN08cWMr21MIOoB0Ki0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/auth/logout?username=alfonso&password=Password123!",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "alfonso"
+                },
+                {
+                  "key": "password",
+                  "value": "Password123!"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "refresh JWT token",
+          "id": "b14c9fd3-9c41-46e7-a79d-6aa123a99106",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTgzODUsImV4cCI6MTc3Mjg5MDM4NSwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.4x2uzyrhmkMAb72kdWfDPIRe8VXqC0fW3peuP5O798c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/auth/refresh?username=alfonso&password=Password123!",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "alfonso"
+                },
+                {
+                  "key": "password",
+                  "value": "Password123!"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f433d411-28e0-4fcd-8785-55d915cf4789"
+    },
+    {
+      "name": "Games",
+      "item": [
+        {
+          "name": "Create new game",
+          "id": "ab0e8683-1a8d-4ac5-a1bb-679c18f494a8",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTA5NTMsImV4cCI6MTc3Mjk4Mjk1Mywic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.FKOUl-1emC2VGm588kzB8DIV9duqgMTXk1_s7QScX-g",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"whitePlayerId\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n    \"blackPlayerId\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\",\r\n    \"timeControl\": \"blitz\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/games",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List of games",
+          "id": "2004c947-fbcc-483c-a685-3310bf299020",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzODk0MjcsImV4cCI6MTc3Mjk4MTQyNywic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.S6vVBzNouOV33G7aOkFA5r2UR6ro8TN_JLbZ1t7odsM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"blackPlayerId\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\",\r\n  \"timeControl\": \"blitz\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/games",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get game details",
+          "id": "36bf3a65-af50-464d-b40d-00ec01be39c7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzODk0MjcsImV4cCI6MTc3Mjk4MTQyNywic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.S6vVBzNouOV33G7aOkFA5r2UR6ro8TN_JLbZ1t7odsM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseURL}}/games/1f87462c-e902-4f09-8f8f-611a25ff4fb2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games",
+                "1f87462c-e902-4f09-8f8f-611a25ff4fb2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Join available game",
+          "id": "9ec0fe33-830c-446d-9975-22807a28acb7",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzODk0MjcsImV4cCI6MTc3Mjk4MTQyNywic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.S6vVBzNouOV33G7aOkFA5r2UR6ro8TN_JLbZ1t7odsM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/games/f8cca056-4d29-4898-ba8f-93c9c1be9574/join?blackPlayerId=67d946ff-781e-4ea0-9377-d70fb0424551",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games",
+                "f8cca056-4d29-4898-ba8f-93c9c1be9574",
+                "join"
+              ],
+              "query": [
+                {
+                  "key": "blackPlayerId",
+                  "value": "67d946ff-781e-4ea0-9377-d70fb0424551"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "End game",
+          "id": "a28c4f5a-6780-431a-9eba-553734c775a5",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTY4MTQsImV4cCI6MTc3Mjk4ODgxNCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.EXFNzGeCuPcm1FyX0ADpe94Amh3PrGAZrUj6WrNGoVQ",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/games/1f87462c-e902-4f09-8f8f-611a25ff4fb2/finish?result=white_wins",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games",
+                "1f87462c-e902-4f09-8f8f-611a25ff4fb2",
+                "finish"
+              ],
+              "query": [
+                {
+                  "key": "result",
+                  "value": "white_wins",
+                  "uuid": "6ba101a6-ddea-49f4-af48-a696034a1209"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Resign from game",
+          "id": "731a3555-8ae4-4f4b-be1a-e863ff5d1f77",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTY5OTQsImV4cCI6MTc3Mjk4ODk5NCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.wEYDnV1uUCIu_61ksVxFtk9G25Qhrf093tHI7skCz9s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/games/df653c57-6c5a-4494-a35d-d0da61dcf9c2/resign",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games",
+                "df653c57-6c5a-4494-a35d-d0da61dcf9c2",
+                "resign"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Propose or accept draw",
+          "id": "f76e1318-4981-487a-a9ba-6d0181a916eb",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTM1MzcsImV4cCI6MTc3Mjk4NTUzNywic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.c42u7pp_wP2ZXMRUnZCezvpgTQIN_3o4tS52NQT2mTA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/games/6137045e-7e7c-4275-b0f9-f800b9f7c62f/draw?accept=true",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "games",
+                "6137045e-7e7c-4275-b0f9-f800b9f7c62f",
+                "draw"
+              ],
+              "query": [
+                {
+                  "key": "accept",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "e6602259-b18f-4a51-8ebe-e7cbbd0db226"
+    },
+    {
+      "name": "Friends",
+      "item": [
+        {
+          "name": "Add friend",
+          "id": "b2be96e5-dd29-403f-b83c-b86a22b491f2",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user1Id\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n  \"user2Id\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/friends",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "friends"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all friend list",
+          "id": "bb6a7961-ce57-4ac2-90c7-deb355444312",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user1Id\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n  \"user2Id\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/friends",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "friends"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove friend",
+          "id": "6f7321df-9ee0-40d3-a45f-3aee20b4c201",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"user1Id\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n  \"user2Id\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3001/friends/user/29b5e8b0-7d9c-4783-803f-53be19ca1a5b/user/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3001",
+              "path": [
+                "friends",
+                "user",
+                "29b5e8b0-7d9c-4783-803f-53be19ca1a5b",
+                "user",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get single friend list",
+          "id": "d2c73a52-cb2d-4963-ae76-ec2388c4727b",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/friends/user/29b5e8b0-7d9c-4783-803f-53be19ca1a5b",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "friends",
+                "user",
+                "29b5e8b0-7d9c-4783-803f-53be19ca1a5b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "ed5ded65-6b5c-49c1-94f8-3500d04c14bd"
+    },
+    {
+      "name": "Messages",
+      "item": [
+        {
+          "name": "Get all messages",
+          "id": "14dcb177-95d4-4272-a880-81416bc0f019",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user messages",
+          "id": "3058ca0e-498f-42df-b4e3-fed1f6525d0f",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages/3f696b1b-00bd-4df5-8ea5-cef9dc53286f",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "3f696b1b-00bd-4df5-8ea5-cef9dc53286f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send message",
+          "id": "71d2474b-63ba-4963-ad11-32f9dd4322d4",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAyOTgzODUsImV4cCI6MTc3Mjg5MDM4NSwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.4x2uzyrhmkMAb72kdWfDPIRe8VXqC0fW3peuP5O798c",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"gameId\": \"028de8ce-4930-4f9a-8b03-fa2d4687db6f\",\r\n  \"userId\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\",\r\n  \"content\": \"Thanks you too.\",\r\n  \"createdAt\": \"2026-02-05T12:00:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/messages",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update message",
+          "id": "6db6ded0-422a-425e-8e25-6f563d7313ba",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"Great move! You're playing well!!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/messages/3f696b1b-00bd-4df5-8ea5-cef9dc53286f",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "3f696b1b-00bd-4df5-8ea5-cef9dc53286f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete message",
+          "id": "00eb2025-0a30-4efd-83ae-58b66a77ae4d",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"content\": \"Great move! You're playing well!!\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/messages/36a50564-54f5-4f86-8ae2-67ba92de95ff",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "36a50564-54f5-4f86-8ae2-67ba92de95ff"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get messages in game",
+          "id": "287cd77d-647c-4f11-bc3c-921aa4ccd4c1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages/game/028de8ce-4930-4f9a-8b03-fa2d4687db6f",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "game",
+                "028de8ce-4930-4f9a-8b03-fa2d4687db6f"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user's sent messages",
+          "id": "aff9852a-afcd-46d0-add0-40f1d29acd3c",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages/user/29b5e8b0-7d9c-4783-803f-53be19ca1a5b",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "user",
+                "29b5e8b0-7d9c-4783-803f-53be19ca1a5b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get messages between two users",
+          "id": "eef21b4c-dfad-492d-82b5-edd51d77b826",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages/between/29b5e8b0-7d9c-4783-803f-53be19ca1a5b/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "between",
+                "29b5e8b0-7d9c-4783-803f-53be19ca1a5b",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New Request",
+          "id": "ea39e637-b21b-4db2-a9df-9f67149fdc8d",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/messages/10555fc3-03c2-41ee-817d-4512eee77928/read",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "messages",
+                "10555fc3-03c2-41ee-817d-4512eee77928",
+                "read"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "3dc619f8-e3b3-4b68-b036-d3792f34280a"
+    },
+    {
+      "name": "Moves",
+      "item": [
+        {
+          "name": "Create move",
+          "id": "ebcb729c-7389-46c4-8a06-be1e19875cc5",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"gameId\": \"1f87462c-e902-4f09-8f8f-611a25ff4fb2\",\r\n    \"playerId\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n    \"moveNumber\": 4,\r\n    \"sanMove\": \"Qxf7#\",\r\n    \"fromSquare\": \"h5\",\r\n    \"toSquare\": \"f7\",\r\n    \"startRow\": 3, \"startCol\": 7, \"endRow\": 1, \"endCol\": 5,\r\n    \"fenAfterMove\": \"r1bqkb1r/pppp1Qpp/2n2n2/4p3/2B1P3/8/PPPP1PPP/RNB1K1NR b KQkq - 0 4\",\r\n    \"timeSpentMs\": 1000,\r\n    \"is_check\": true, \"is_checkmate\": true\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/moves",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "moves"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get move details",
+          "id": "7f3c879a-4d03-4da1-9d45-ba76be395dd3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMDM2NzIsImV4cCI6MTc3Mjg5NTY3Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.IeIycRL75Pz3tegqMMkB60d65W58DjlW2SM2Huy2kfE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"gameId\": \"6137045e-7e7c-4275-b0f9-f800b9f7c62f\",\r\n    \"playerId\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n    \"moveNumber\": 1,\r\n    \"sanMove\": \"e4\",\r\n    \"fromSquare\": \"e2\",\r\n    \"toSquare\": \"e4\",\r\n    \"startRow\": 6,\r\n    \"startCol\": 4,\r\n    \"endRow\": 4,\r\n    \"endCol\": 4,\r\n    \"fenAfterMove\": \"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\",\r\n    \"timeSpentMs\": 2000,\r\n    \"isCheck\": false,\r\n    \"isMate\": false\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/moves/7d305719-e7a3-4f77-b0bd-278d7771c7d9",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "moves",
+                "7d305719-e7a3-4f77-b0bd-278d7771c7d9"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get game moves",
+          "id": "afb03be9-2a98-4026-b0e4-9541844e146b",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTY5OTQsImV4cCI6MTc3Mjk4ODk5NCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.wEYDnV1uUCIu_61ksVxFtk9G25Qhrf093tHI7skCz9s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/moves/game/1f87462c-e902-4f09-8f8f-611a25ff4fb2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "moves",
+                "game",
+                "1f87462c-e902-4f09-8f8f-611a25ff4fb2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get player moves",
+          "id": "c78d2c05-1f9d-4e7d-9569-0146aa24fbd6",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzOTY5OTQsImV4cCI6MTc3Mjk4ODk5NCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.wEYDnV1uUCIu_61ksVxFtk9G25Qhrf093tHI7skCz9s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/moves/player/29b5e8b0-7d9c-4783-803f-53be19ca1a5b",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "moves",
+                "player",
+                "29b5e8b0-7d9c-4783-803f-53be19ca1a5b"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "edbf4b33-516d-4c50-9bdb-f0218f941329"
+    },
+    {
+      "name": "User Setting",
+      "item": [
+        {
+          "name": "Update user settings",
+          "id": "717e6d36-0356-480b-b5d7-8727f134cbe1",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMTE1NTIsImV4cCI6MTc3MjkwMzU1Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.WciGy0QEM3Mj6G52ixaWRyvpbY1C9YBe93Ld-7po5yo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"theme\": \"Dark\",\r\n    \"language\": \"Italian\",\r\n    \"allowEngineAnalysis\": true,\r\n    \"showMoveSuggestions\": true,\r\n    \"notificationsEnabled\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/user-settings/user/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "user-settings",
+                "user",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user settings by user ID",
+          "id": "91f1ff0d-2ca3-4a46-85e2-38fd9e7deaa3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMTE1NTIsImV4cCI6MTc3MjkwMzU1Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.WciGy0QEM3Mj6G52ixaWRyvpbY1C9YBe93Ld-7po5yo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "javascript"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/user-settings/user/0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "user-settings",
+                "user",
+                "0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all user settings",
+          "id": "e92ff36f-7099-45c9-8075-42bbebddb7b8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzAzMTE1NTIsImV4cCI6MTc3MjkwMzU1Miwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.WciGy0QEM3Mj6G52ixaWRyvpbY1C9YBe93Ld-7po5yo",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"whitePlayerId\": \"29b5e8b0-7d9c-4783-803f-53be19ca1a5b\",\r\n  \"blackPlayerId\": \"0db9eb0b-2fa7-4ad8-a7c4-40202f4a982d\",\r\n  \"timeControl\": \"blitz\"\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/user-settings",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "user-settings"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "16ae7ee0-947d-4989-a083-5666b77462a8"
+    },
+    {
+      "name": "Game States",
+      "item": [
+        {
+          "name": "Get all game states",
+          "id": "ddbc2c72-aecd-4091-811e-0ddcf9096fb8",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/game-states",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create game state",
+          "id": "96d7c489-ada2-46d1-8ced-0ac10a9914ec",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"gameId\": \"4eefad18-5588-4b27-bb7a-3334d426d0fd\",\r\n  \"moveNumber\": \"1\",\r\n  \"fen\": \"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\",\r\n  \"evaluationCp\": 35,\r\n  \"bestMove\": \"c5\",\r\n  \"analysisJson\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/game-states",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get game state by ID",
+          "id": "70e1e74c-97bd-4a7e-a00b-7df0fabbf894",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"gameId\": \"4eefad18-5588-4b27-bb7a-3334d426d0fd\",\r\n  \"moveNumber\": \"1\",\r\n  \"fen\": \"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\",\r\n  \"evaluationCp\": 35,\r\n  \"bestMove\": \"c5\",\r\n  \"analysisJson\": null\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/game-states/7ce3e2ca-585f-4740-885d-3b5ad27c8012",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states",
+                "7ce3e2ca-585f-4740-885d-3b5ad27c8012"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get game states by game",
+          "id": "a4f7f749-e19e-47d7-9f73-dd7d2d5c5206",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"gameId\": \"4eefad18-5588-4b27-bb7a-3334d426d0fd\",\r\n  \"moveNumber\": \"1\",\r\n  \"fen\": \"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\",\r\n  \"evaluationCp\": 35,\r\n  \"bestMove\": \"c5\",\r\n  \"analysisJson\": null\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/game-states/game/4eefad18-5588-4b27-bb7a-3334d426d0fd",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states",
+                "game",
+                "4eefad18-5588-4b27-bb7a-3334d426d0fd"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete game state",
+          "id": "784c447b-d971-4ad1-bf63-b7adeabc6345",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"gameId\": \"4eefad18-5588-4b27-bb7a-3334d426d0fd\",\r\n  \"moveNumber\": \"1\",\r\n  \"fen\": \"rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\",\r\n  \"evaluationCp\": 35,\r\n  \"bestMove\": \"c5\",\r\n  \"analysisJson\": null\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/game-states/5591a394-1df6-4229-ae0c-ab77fe088e50",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states",
+                "5591a394-1df6-4229-ae0c-ab77fe088e50"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update game state",
+          "id": "6e03ec69-2893-4dd1-a125-3ccc9e94ea08",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzA0MDA1NTAsImV4cCI6MTc3Mjk5MjU1MCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MkrtFypElPQEfEJN33ZXOkfeTtyjZA8qC6fYY0u_rGA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"gameId\": \"86127c2d-3ac1-4b25-84c8-389dcdb794fd\",\r\n  \"moveNumber\": \"6\",\r\n  \"fen\": \"rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2\",\r\n  \"evaluationCp\": 15,\r\n  \"bestMove\": \"Nf3\",\r\n  \"analysisJson\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/game-states/1b779541-e210-4aa7-8f40-dcf2e9cfd8e3",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "game-states",
+                "1b779541-e210-4aa7-8f40-dcf2e9cfd8e3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "9aebf47d-fd08-4ca7-98e9-74e012aa071e"
+    },
+    {
+      "name": "Email",
+      "item": [
+        {
+          "name": "Send email",
+          "id": "db772092-0240-4150-84cf-b6b5281487df",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"to\": \"recipient@example.com\",\r\n  \"subject\": \"Test Subject\",\r\n  \"body\": \"This is a test email body\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/email/send",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "email",
+                "send"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7942e14d-d008-41e6-a5fa-edbf11ac7cd0"
+    },
+    {
+      "name": "Stockfish",
+      "item": [
+        {
+          "name": "Health Check",
+          "id": "7ad6fc72-f673-4142-8a99-03b41eeadece",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/health",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "health"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Initialize Engine",
+          "id": "9d871ab0-54ba-4435-9e23-ef8ff7c592a8",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/init",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "init"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Analyze Completed Game",
+          "id": "6430c3ae-f493-43d2-8724-d1b2be201529",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/game/1f87462c-e902-4f09-8f8f-611a25ff4fb2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "game",
+                "1f87462c-e902-4f09-8f8f-611a25ff4fb2"
+              ],
+              "query": [
+                {
+                  "key": "",
+                  "value": null,
+                  "type": "text",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Move Analysis",
+          "id": "7f65f0c9-dbfc-4c5a-a71f-afd222363a3e",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/move/957712d6-ea20-4b3b-b982-f3823c57ea5b",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "move",
+                "957712d6-ea20-4b3b-b982-f3823c57ea5b"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Game Insights",
+          "id": "6c38736a-5899-450e-bae8-94a8c0e35c74",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/insights/1f87462c-e902-4f09-8f8f-611a25ff4fb2",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "insights",
+                "1f87462c-e902-4f09-8f8f-611a25ff4fb2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Shutdown Engine",
+          "id": "bf55125e-f501-46c0-a95f-4c3680ebf341",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NzE0NDI1MTAsImV4cCI6MTc3NDAzNDUxMCwic3ViIjoiMGRiOWViMGItMmZhNy00YWQ4LWE3YzQtNDAyMDJmNGE5ODJkIn0.MjnIEhfyWHIuzdPx9-M-_NXrNR2h_K5NmPc1j659kQM",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/analysis/shutdown",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "analysis",
+                "shutdown"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "a7ecfef2-ffc5-4818-856d-5ced925a176a"
+    }
+  ],
+  "variable": [
+    {
+      "id": "1bc67eed-72fc-47c7-aa41-83240397aafa",
+      "key": "baseURL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

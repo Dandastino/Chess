@@ -31,6 +31,8 @@ Designed in multiple phases from **medium rule-based logic → advanced Stockfis
 9. [Database Design](#-database-design)
 10. [Third-Party Integrations](#-third-party-integrations)
 11. [Security](#-security)
+12. [Bot Restrictions & Behavior](#-bot-restrictions--behavior)
+13. [Performance & Scaling](#-performance--scaling)
 
 ---
 
@@ -307,64 +309,66 @@ Connected Clients Receive Real-Time Update
 **REST API Endpoints (Phase 1):**
 ```bash
 # User Management
-POST   /users                                   # Register new user
-GET    /users                                   # Get all users
-GET    /users/{id}                              # Get user profile
-PATCH  /users/{id}                              # Update profile
-PATCH  /users/{id}/avatar                       # Upload avatar
-GET    /users/leaderboard                       # Top 100 players by Elo rating
-GET    /users/{id}/stats                        # Get player statistics 
+POST     /users                                    # Register new user
+GET      /users                                    # Get all users
+GET      /users/{id}                               # Get user profile
+PATCH    /users/{id}                               # Update profile
+PATCH    /users/{id}/avatar                        # Upload avatar
+GET      /users/leaderboard                        # Top 100 players by Elo rating
+GET      /users/{id}/stats                         # Get player statistics 
 
 # Authentication
-POST   /auth/login                              # Login 
-POST   /auth/logout                             # Logout 
-POST   /auth/refresh                            # Refresh JWT token with new expiration
+POST     /auth/login                               # Login 
+POST     /auth/logout                              # Logout 
+POST     /auth/refresh                             # Refresh JWT token with new expiration
 
 # Games
-POST   /games                                   # Create new game
-GET    /games/{id}                              # Get game details
-GET    /games/available                         # List waiting games 
-POST   /games/{id}/join                         # Join available game 
-PATCH  /games/{id}/finish                       # End game 
-PATCH  /games/{id}/resign                       # Resign from game 
-PATCH  /games/{id}/draw                         # Propose or accept draw 
+POST     /games                                    # Create new game
+GET      /games/{id}                               # Get game details
+GET      /games/available                          # List waiting games 
+POST     /games/{id}/join                          # Join available game 
+PATCH    /games/{id}/finish                        # End game 
+PATCH    /games/{id}/resign                        # Resign from game 
+PATCH    /games/{id}/draw                          # Propose or accept draw 
 
 # User Settings
-GET    /user-settings                           # Get all user settings
-GET    /user-settings/user/{user_id}            # Get user settings by user ID 
-PUT    /user-settings/user/{user_id}            # Update user settings 
+GET      /user-settings                            # Get all user settings
+GET      /user-settings/user/{user_id}             # Get user settings by user ID 
+PUT      /user-settings/user/{user_id}             # Update user settings 
 
 # Moves
-POST   /moves                                   # Create move
-GET    /moves/{id}                              # Get move details
-GET    /moves/game/{game_id}                    #  
-GET    /moves/player/{player_id}                # Get player moves
+POST     /moves                                    # Create move
+GET      /moves/{id}                               # Get move details
+GET      /moves/game/{game_id}                     # Get game moves
+GET      /moves/player/{player_id}                 # Get player moves
 
 # Messages
-GET    /messages                                # Get all messages
-GET    /messages/{id}                           # Get message by ID
-POST   /messages                                # Send message
-PUT    /messages/{id}                           # Update message
-DELETE /messages/{id}                           # Delete message
-GET    /messages/game/{gameId}                  # Get messages in game
-GET    /messages/user/{userId}                  # Get user's sent messages
-GET    /messages/between/{userId1}/{userId2}    # Get messages between two users
-POST   /messages/{id}/read                      # Mark message as read
+GET      /messages                                 # Get all messages
+GET      /messages/{id}                            # Get message by ID
+POST     /messages                                 # Send message
+PUT      /messages/{id}                            # Update message
+DELETE   /messages/{id}                            # Delete message
+GET      /messages/game/{gameId}                   # Get messages in game
+GET      /messages/user/{userId}                   # Get user's sent messages
+GET      /messages/between/{userId1}/{userId2}     # Get messages between two users
+POST     /messages/{id}/read                       # Mark message as read
 
 # Friends
-POST   /friends                                 # Add friend
-DELETE /friends/user/{userId}/user/{userId}     # Remove friend
-GET    /friends                                 # Get all friend list
-GET    /friends/user/{userId}                   # Get single friend list
+POST     /friends                                  # Add friend
+DELETE   /friends/user/{userId}/user/{userId}      # Remove friend
+GET      /friends                                  # Get all friend list
+GET      /friends/user/{userId}                    # Get single friend list
 
 # Game States
-GET    /game-states                             # Get all game states
-GET    /game-states/{game_state_id}             # Get game state by ID
-POST   /game-states                             # Create game state
-PUT    /game-states/{game_state_id}             # Update game state
-DELETE /game-states/{game_state_id}             # Delete game state
-GET    /game-states/game/{game_id}              # Get game states by game
+GET      /game-states                              # Get all game states
+GET      /game-states/{game_state_id}              # Get game state by ID
+POST     /game-states                              # Create game state
+PUT      /game-states/{game_state_id}              # Update game state
+DELETE   /game-states/{game_state_id}              # Delete game state
+GET      /game-states/game/{game_id}               # Get game states by game
 
+# Mail
+POST     /api/email/send                           # Send email
 ```
 
 **Key Features:**
@@ -408,14 +412,6 @@ POST /api/analysis/init                 # Initialize engine
 POST /api/analysis/shutdown             # Shutdown engine
 GET  /api/analysis/health               # Service health check
 
-# Game Openings
-GET    /game-openings                           # Get all game openings
-GET    /game-openings/{game_opening_id}         # Get game opening by ID
-POST   /game-openings                           # Create game opening
-DELETE /game-openings/{game_opening_id}         # Delete game opening
-GET    /game-openings/game/{game_id}            # Get game openings by game
-GET    /game-openings/opening/{opening_id}      # Get game openings by opening
-
 ```
 
 **Configuration (application.properties):**
@@ -441,7 +437,7 @@ Download from https://stockfishchess.org/
 - Store engine evaluation after every move in `MoveAnalysis` entity
 - Compare player's move with Stockfish's best move
 - Calculate centipawn loss (CPL) to detect blunders:
-  - **Blunder**: CPL > 300
+  - **Blunder**: CPL > 300 
   - **Mistake**: CPL 150-300
   - **Inaccuracy**: CPL 50-150
   - **Good Move**: CPL < 50
@@ -542,29 +538,29 @@ The application uses **PostgreSQL** with a fully normalized, relational schema.
 ---
 
 ### Email (SMTP) - Notifications [Optional]
-    - Purpose: send confirmation emails, password reset links, notifications.
-    - Endpoint: `POST /api/email/send` (see above). Implementation uses Spring `JavaMailSender` (`EmailService`).
-    - How to test: set `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD` in `env.properties`, start the app, then:
-        ```bash
-        curl -X POST http://localhost:3001/api/email/send \
+   - Purpose: send confirmation emails, password reset links, notifications.
+   - Endpoint: `POST /api/email/send` (see above). Implementation uses Spring `JavaMailSender` (`EmailService`).
+   - How to test: set `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD` in `env.properties`, start the app, then:
+      ```bash
+         curl -X POST http://localhost:3001/api/email/send \
             -H "Content-Type: application/json" \
             -d '{"to":"you@example.com","subject":"Test","body":"Hello"}'
-        ```
-    - Error handling: SMTP failures produce `502 Bad Gateway` with a message. Validation errors produce `400`.
+      ```
+   - Error handling: SMTP failures produce `502 Bad Gateway` with a message. Validation errors produce `400`.
 
 ### Cloudinary - Image Hosting [Optional]
-    - Purpose: offload hosting of uploaded images to a CDN-backed service, reduce storage and bandwidth on the app server, and get transformed/optimized image URLs.
-    - How to test: set `CLOUDINARY_NAME`, `CLOUDINARY_KEY`, `CLOUDINARY_SEC` in `env.properties`, then use the avatar upload endpoint (Postman form-data or curl with `-F avatar=@path/to/file`).
-    - Error handling: file validation errors produce `400`, oversized uploads `413`, and upload failures return `500` with a descriptive message.
+   - Purpose: offload hosting of uploaded images to a CDN-backed service, reduce storage and bandwidth on the app server, and get transformed/optimized image URLs.
+   - How to test: set `CLOUDINARY_NAME`, `CLOUDINARY_KEY`, `CLOUDINARY_SEC` in `env.properties`, then use the avatar upload endpoint (Postman form-data or curl with `-F avatar=@path/to/file`).
+   - Error handling: file validation errors produce `400`, oversized uploads `413`, and upload failures return `500` with a descriptive message.
 
 ### Stockfish - Chess AI [Optional]
-    - **Type**: Local chess engine executable (not a cloud API service)
-    - **Purpose**: Provides advanced chess analysis, move evaluation, and best move suggestions for Phase 2 AI features
-    - **Protocol**: UCI (Universal Chess Interface) via stdin/stdout communication
-    - **Configuration**: Set `stockfish.path=stockfish/stockfish.exe` in `application.properties`
-    - **Performance**: Depth 15 (~2s), Depth 20 (~5s), Depth 25 (~30s) per position
-    - **Error handling**: If Stockfish is not installed or path is incorrect, the system logs a warning and gracefully degrades - AI features become unavailable without crashing the app
-    - **How to test**: After installation, start the app and call `GET /api/analysis/health` to verify engine status
+   - **Type**: Local chess engine executable (not a cloud API service)
+   - **Purpose**: Provides advanced chess analysis, move evaluation, and best move suggestions for Phase 2 AI features
+   - **Protocol**: UCI (Universal Chess Interface) via stdin/stdout communication
+   - **Configuration**: Set `stockfish.path=stockfish/stockfish.exe` in `application.properties`
+   - **Performance**: Depth 15 (~2s), Depth 20 (~5s), Depth 25 (~30s) per position
+   - **Error handling**: If Stockfish is not installed or path is incorrect, the system logs a warning and gracefully degrades - AI features become unavailable without crashing the app
+   - **How to test**: After installation, start the app and call `GET /api/analysis/health` to verify engine status
 
 
 ## Security
@@ -585,6 +581,64 @@ The application uses **PostgreSQL** with a fully normalized, relational schema.
 
 ---
 
+## Bot Restrictions & Behavior
+
+### Overview
+Bots (`UserType.BOT`) are AI-controlled players that can participate in games. However, they are restricted from certain operations that are meant exclusively for human players. These restrictions ensure data integrity and prevent bots from interfering with the social and administrative features of the application.
+
+### Operations BOTs CANNOT Perform ❌
+
+| Operation | Reason | Endpoint/Service |
+|-----------|--------|------------------|
+| **Create/Initiate Games** | Only humans can start a game. Bots can only join. | `POST /games` → `GameService.createGame()` |
+| **Modify Messages** | Bots cannot edit their chat messages after sending | `PUT /messages/{id}` → `MessageService.updateMessage()` |
+| **Delete Messages** | Bots cannot remove their messages from chat | `DELETE /messages/{id}` → `MessageService.deleteMessage()` |
+| **Modify Profile Settings** | Bots cannot change bio, username, email, or country | `PATCH /users/{id}` → `UsersService.partialUpdateUser()` |
+| **Have Friends** | Bots cannot add or remove friend relationships | `POST /friends` → `FriendService.createFriendship()` |
+
+### Operations BOTs CAN Perform ✅
+
+| Operation | Notes | Endpoint |
+|-----------|-------|----------|
+| **Send Messages** | Bots can chat during games | `POST /messages` |
+| **Join Games** | Bots can accept invitations or join waiting games | `POST /games/{id}/join` |
+| **Play Moves** | Bots can make legal chess moves | `POST /moves` |
+| **Resign/Draw** | Bots can resign or propose draws during gameplay | `PATCH /games/{id}/resign`, `PATCH /games/{id}/draw` |
+| **Read Data** | Bots can view profiles, stats, messages, etc. | `GET` endpoints |
+| **Receive Elo Updates** | System can update bot Elo ratings after games | Automatic via `GameService` |
+
+### Cheating Detection ⛔
+
+- **Bot Games**: Games where `isBotGame = true` are **automatically exempt** from cheating analysis
+- **Human vs Bot Games**: Games involving at least one bot player skip cheating detection
+  - Bots have deterministic AI engines, not human-like patterns
+  - Cheating detection is designed for human behavior analysis
+
+**Implementation**: `CheatingDetectionService.analyzeGame()` checks for bot participation and skips analysis early.
+
+### Exception Handling
+
+When a bot attempts a restricted operation, the system returns a **ValidationException** with a clear error message:
+
+```json
+{
+  "timestamp": "2026-02-18T19:00:00Z",
+  "status": 400,
+  "error": "ValidationException",
+  "message": "Bots cannot create games",
+  "path": "/games"
+}
+```
+
+**Common Bot Restriction Errors:**
+- `"Bots cannot create games"`
+- `"Bots cannot modify messages"`
+- `"Bots cannot delete messages"`
+- `"Bots cannot modify their settings"`
+- `"Bots cannot have friends"`
+
+---
+
 ## Performance & Scaling
 
 **Optimization Features:**
@@ -598,11 +652,5 @@ The application uses **PostgreSQL** with a fully normalized, relational schema.
 - Application logs: `logs/chess.log`
 - Database query logs: Enable slow query log in PostgreSQL
 - JVM metrics: Use tools like JConsole or VisualVM
-
----
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ---

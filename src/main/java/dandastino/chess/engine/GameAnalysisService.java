@@ -7,7 +7,10 @@ import dandastino.chess.games.Game;
 import dandastino.chess.gamesOpenings.GameOpeningDTO;
 import dandastino.chess.gamesOpenings.GameOpeningService;
 import dandastino.chess.moveAnalyses.MoveAnalysis;
+import dandastino.chess.moveAnalyses.MoveAnalysisEngineService;
+import dandastino.chess.moveAnalyses.MoveAnalysesRepository;
 import dandastino.chess.moves.Move;
+import dandastino.chess.moves.MovesRepository;
 import dandastino.chess.openings.Opening;
 import dandastino.chess.openings.OpeningClassificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +42,15 @@ public class GameAnalysisService {
     
     @Autowired
     private CheatingDetectionService cheatingDetectionService;
+    
+    @Autowired
+    private MoveAnalysisEngineService moveAnalysisEngineService;
+    
+    @Autowired
+    private MoveAnalysesRepository moveAnalysesRepository;
+    
+    @Autowired
+    private MovesRepository movesRepository;
     
     private StockfishEngine stockfishEngine;
 
@@ -64,7 +77,7 @@ public class GameAnalysisService {
      */
     public GameAnalysisResult analyzeCompletedGame(Game game, List<Move> moves) {
         if (stockfishEngine == null) {
-            logger.warn("Stockfish engine not initialized, skipping analysis");
+            logger.error("Stockfish engine not initialized. Please call POST /api/analysis/init first.");
             return null;
         }
 
@@ -75,7 +88,7 @@ public class GameAnalysisService {
 
         try {
             // 1. Analyze each move
-            List<MoveAnalysis> moveAnalyses = analyzeMoves(moves);
+            List<MoveAnalysis> moveAnalyses = analyzeMoves(game, moves);
             result.setMoveAnalyses(moveAnalyses);
             logger.info("Analyzed {} moves", moveAnalyses.size());
 
@@ -134,22 +147,82 @@ public class GameAnalysisService {
     }
 
     /**
-     * Analyze individual moves in a game
+     * Analyze individual moves in a game using Stockfish engine
      */
-    private List<MoveAnalysis> analyzeMoves(List<Move> moves) {
-        // In a real implementation, would replay the game and analyze each position
-        // For now, this is a placeholder that shows the flow
+    private List<MoveAnalysis> analyzeMoves(Game game, List<Move> moves) {
+        if (stockfishEngine == null) {
+            logger.error("Stockfish engine not initialized, cannot analyze moves");
+            throw new IllegalStateException("Stockfish engine not initialized. Please call POST /api/analysis/init first.");
+        }
         
-        logger.debug("Analyzing {} moves", moves.size());
+        if (moves == null || moves.isEmpty()) {
+            logger.warn("No moves to analyze");
+            return List.of();
+        }
         
-        // TODO: Implement move-by-move analysis
-        // Would need to:
-        // 1. Start from initial position
-        // 2. For each move: get FEN before, apply move, get FEN after
-        // 3. Call moveAnalysisService.analyzeMoveQuality()
-        // 4. Save results
+        logger.info("Analyzing {} moves with Stockfish engine", moves.size());
         
-        return List.of();
+        List<MoveAnalysis> analysisResults = new ArrayList<>();
+        
+        // Start with initial FEN from game
+        String initialFen = game.getInitialFen();
+        if (initialFen == null || initialFen.isEmpty()) {
+            initialFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"; // Standard starting position
+        }
+        
+        String fenBefore = initialFen;
+        
+        // Analyze each move
+        for (int i = 0; i < moves.size(); i++) {
+            Move move = moves.get(i);
+            String fenAfter = move.getFenAfterMove();
+            
+            if (fenAfter == null || fenAfter.isEmpty()) {
+                logger.warn("Move {} has no FEN after move, skipping analysis", i + 1);
+                fenBefore = fenAfter; // Continue to next move
+                continue;
+            }
+            
+            try {
+                logger.debug("Analyzing move {}/{}: {} (from {} to {})", 
+                           i + 1, moves.size(), move.getSanMove(), fenBefore, fenAfter);
+                
+                // Analyze the move quality using Stockfish
+                MoveAnalysis analysis = moveAnalysisEngineService.analyzeMoveQuality(
+                    stockfishEngine, 
+                    fenBefore, 
+                    move, 
+                    fenAfter
+                );
+                
+                // Set bidirectional relationship
+                analysis.setMove(move);
+                
+                // Save analysis to database
+                MoveAnalysis savedAnalysis = moveAnalysesRepository.save(analysis);
+                
+                // Link analysis to move and save
+                move.setMoveAnalysis(savedAnalysis);
+                movesRepository.save(move);
+                
+                analysisResults.add(savedAnalysis);
+                
+                logger.debug("Move analysis saved: {} - Review: {}", 
+                           move.getSanMove(), savedAnalysis.getReview());
+                
+            } catch (Exception e) {
+                logger.error("Error analyzing move {}: {}", i + 1, e.getMessage(), e);
+                // Continue with next move even if one fails
+            }
+            
+            // Update fenBefore for next iteration
+            fenBefore = fenAfter;
+        }
+        
+        logger.info("Completed analysis of {} moves, {} successful analyses", 
+                   moves.size(), analysisResults.size());
+        
+        return analysisResults;
     }
 
     /**
@@ -161,10 +234,10 @@ public class GameAnalysisService {
         // Analyze move patterns
         if (!moveAnalyses.isEmpty()) {
             long blunders = moveAnalyses.stream()
-                    .filter(m -> m.getReview().toString().equals("blunder"))
+                    .filter(m -> m.getReview() == dandastino.chess.moveAnalyses.Review.Blunder)
                     .count();
             long mistakes = moveAnalyses.stream()
-                    .filter(m -> m.getReview().toString().equals("mistake"))
+                    .filter(m -> m.getReview() == dandastino.chess.moveAnalyses.Review.Mistake)
                     .count();
 
             insights.setBlunderCount((int) blunders);
@@ -193,8 +266,17 @@ public class GameAnalysisService {
      */
     public void shutdownEngine() {
         if (stockfishEngine != null) {
-            stockfishEngine.quit();
-            logger.info("Game Analysis Service shutdown complete");
+            try {
+                stockfishEngine.quit();
+                logger.info("Stockfish engine terminated successfully");
+            } catch (Exception e) {
+                logger.warn("Error during Stockfish shutdown (this is normal if process already terminated): {}", e.getMessage());
+            } finally {
+                stockfishEngine = null;
+                logger.info("Game Analysis Service shutdown complete");
+            }
+        } else {
+            logger.info("Stockfish engine was not running");
         }
     }
 }

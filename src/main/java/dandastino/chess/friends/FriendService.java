@@ -38,6 +38,11 @@ public class FriendService {
         User user2 = usersRepository.findById(friendDTO.user2Id())
                 .orElseThrow(() -> new NotFoundException("User 2 not found"));
 
+        // Bots cannot have friends
+        if (user1.getType().equals(dandastino.chess.users.UserType.BOT) || user2.getType().equals(dandastino.chess.users.UserType.BOT)) {
+            throw new dandastino.chess.exceptions.ValidationException("Bots cannot have friends");
+        }
+
         // Check if friendship already exists
         if (friendshipExists(friendDTO.user1Id(), friendDTO.user2Id())) {
             throw new AlreadyExists("Friendship already exists between these users");

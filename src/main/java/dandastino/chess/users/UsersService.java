@@ -87,6 +87,12 @@ public class UsersService {
 
     public User partialUpdateUser(UUID userId, String bio, String username, String email, Country country, Integer elo_rating) {
         User found = getUserById(userId);
+        
+        // Bots cannot modify their settings
+        if (found.getType().equals(UserType.BOT)) {
+            throw new ValidationException("Bots cannot modify their settings");
+        }
+        
         logger.debug("PATCH request - bio: {}, username: {}, email: {}, country: {}, elo_rating: {}", bio, username, email, country, elo_rating);
 
         // Only update fields that are provided (not null)

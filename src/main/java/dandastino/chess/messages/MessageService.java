@@ -56,6 +56,11 @@ public class MessageService {
         Message message = messagesRepository.findById(messageId)
                 .orElseThrow(() -> new NotFoundException(messageId));
 
+        // Bots cannot modify messages
+        if (message.getSender().getType().equals(dandastino.chess.users.UserType.BOT)) {
+            throw new dandastino.chess.exceptions.ValidationException("Bots cannot modify messages");
+        }
+
         message.setContent(messageDTO.content());
 
         Message saved = messagesRepository.save(message);
@@ -65,6 +70,12 @@ public class MessageService {
     public void deleteMessage(UUID messageId) {
         Message message = messagesRepository.findById(messageId)
                 .orElseThrow(() -> new NotFoundException(messageId));
+
+        // Bots cannot delete messages
+        if (message.getSender().getType().equals(dandastino.chess.users.UserType.BOT)) {
+            throw new dandastino.chess.exceptions.ValidationException("Bots cannot delete messages");
+        }
+
         messagesRepository.delete(message);
     }
 
